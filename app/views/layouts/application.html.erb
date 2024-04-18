@@ -11,8 +11,15 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-	  <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <header>
+      <%= link_to root_path do %>
+        <h1>Cade Buffet?</h1>
+      <% end %>
+    </header>
+    <main>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </main>
   </body>
 </html>
