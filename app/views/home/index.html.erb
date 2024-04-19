@@ -1,0 +1,14 @@
+<section>
+  <h2>Buffets</h2>
+
+  <% @buffets.each do |b| %>
+    <div>
+      <h3><%= link_to b.brand_name %></h3>
+      <%= b.city %>, <%= b.state %>
+    </div>
+  <% end %>
+
+  <% if @buffets.empty? %>
+    <p>Não existem buffets cadastrados.</p>
+  <% end %>
+</section>
