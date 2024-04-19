@@ -7,4 +7,6 @@ class Owner < ApplicationRecord
   def description
     "#{name} - #{email}"
   end
+
+  has_one :buffet
 end
