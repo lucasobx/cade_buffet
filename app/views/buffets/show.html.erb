@@ -12,3 +12,7 @@
   <dd><%= @buffet.address %> - <%= @buffet.neighborhood %>, <%= @buffet.city %> - 
   <%= @buffet.state %> - <%= @buffet.postal_code %></dd>
 </dl>
+
+<% if owner_signed_in? && current_owner == @buffet.owner %>
+  <%= link_to 'Editar', edit_buffet_path %>
+<% end %>

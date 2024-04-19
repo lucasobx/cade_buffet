@@ -1,7 +1,7 @@
 class BuffetsController < ApplicationController
-  def show
-    @buffet = Buffet.find(params[:id])
-  end
+  before_action :set_buffet, only: [:show, :edit, :update]
+
+  def show; end
 
   def new
     @buffet = Buffet.new
@@ -11,14 +11,30 @@ class BuffetsController < ApplicationController
     @buffet = Buffet.new(buffet_params)
     @buffet.owner = current_owner
     if @buffet.save
-      redirect_to @buffet, notice: 'Buffet cadastrado com sucesso.'
+      redirect_to root_path, notice: 'Buffet cadastrado com sucesso.'
     else
       flash.now[:notice] = 'Não foi possível cadastrar o Buffet.'
       render 'new', status: 422
     end
   end
 
+  def edit; end
+
+  def update
+    if @buffet.update(buffet_params)
+      redirect_to @buffet, notice: 'Buffet atualizado com sucesso.'
+    else
+      flash.now[:notice] = 'Não foi possível atualizado o buffet.'
+      render 'new', status: 422
+    end
+  end
+
   private
+
+  def set_buffet
+    @buffet = Buffet.find(params[:id])
+  end
+
   def buffet_params
     params.require(:buffet).permit(
       :brand_name,
