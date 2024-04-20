@@ -1,5 +1,7 @@
 class BuffetsController < ApplicationController
   before_action :set_buffet, only: [:show, :edit, :update]
+  before_action :authenticate_owner!, only: [:new, :create, :edit, :update]
+  before_action :check_owner, only: [:edit, :update]
 
   def show; end
 
@@ -30,6 +32,12 @@ class BuffetsController < ApplicationController
   end
 
   private
+
+  def check_owner
+    unless current_owner == @buffet.owner
+      redirect_to root_path, alert: "Acesso negado."
+    end
+  end
 
   def set_buffet
     @buffet = Buffet.find(params[:id])
