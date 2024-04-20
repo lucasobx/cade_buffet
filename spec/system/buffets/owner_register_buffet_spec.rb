@@ -6,7 +6,6 @@ describe 'Proprietário cadastra um Buffet' do
 
     login_as(owner)
     visit root_path
-    click_on 'Cadastrar Novo Buffet'
     fill_in 'Nome Fantasia', with: 'Casamentos Buffet'
     fill_in 'Razão Social', with: 'Casamentos Buffet LTDA'
     fill_in 'CNPJ', with: '73456164000100'

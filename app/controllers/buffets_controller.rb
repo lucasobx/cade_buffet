@@ -35,7 +35,7 @@ class BuffetsController < ApplicationController
 
   def check_owner
     unless current_owner == @buffet.owner
-      redirect_to root_path, alert: "Acesso negado."
+      redirect_to root_path
     end
   end
 

@@ -2,7 +2,20 @@ require 'rails_helper'
 
 describe 'Dono de Buffet se autentica' do
   it 'com sucesso' do
-    Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+    owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+    Buffet.create!(
+      brand_name: 'Casamentos Buffet',
+      corporate_name: 'Casamentos Buffet LTDA',
+      registration_code: '73456164000100',
+      phone_number: '(11)00001111',
+      email: 'casabuffet@email.com',
+      address: 'Av Machado, 650',
+      neighborhood: 'Jardim do Sol',
+      city: 'Sales',
+      state: 'SP',
+      postal_code: '14980-970',
+      description: 'Buffet especializado em casamentos',
+      owner: owner)
 
     visit root_path
     click_on 'Entrar'

@@ -81,6 +81,19 @@ describe 'Proprietário edita um buffet' do
       postal_code: '14980-970',
       description: 'Buffet especializado em casamentos',
       owner: owner)
+    Buffet.create!(
+      brand_name: 'Edecy Buffet',
+      corporate_name: 'Edecy Buffet LTDA',
+      registration_code: '55996244000122',
+      phone_number: '(11)22229988',
+      email: 'edecy@email.com',
+      address: 'Rua Castilho, 560',
+      neighborhood: 'Piratininga',
+      city: 'Belo Horizonte',
+      state: 'MG',
+      postal_code: '55280-001',
+      description: 'Buffet para festa infantil',
+      owner: second_owner)
 
       login_as(second_owner)
       visit edit_buffet_path(buffet)

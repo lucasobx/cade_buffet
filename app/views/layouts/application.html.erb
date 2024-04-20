@@ -18,7 +18,6 @@
       <nav>
         <% if owner_signed_in? %>
           <%= current_owner.description %> |
-          <%= link_to 'Cadastrar Novo Buffet', new_buffet_path %>
           <%= link_to 'Sair', destroy_owner_session_path, data: { turbo_method: :delete } %>
         <% else %>
           <%= link_to 'Entrar', new_owner_session_path %>

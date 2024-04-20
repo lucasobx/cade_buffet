@@ -17,4 +17,20 @@ describe 'Dono de Buffet cria uma conta' do
     owner = Owner.last
     expect(owner.name).to eq 'Jorge'
   end
+
+  it 'e é redirecionado para o cadastro de buffet' do
+    visit root_path
+    click_on 'Entrar'
+    click_on 'Criar uma conta'
+    fill_in 'Nome', with: 'Jorge'
+    fill_in 'E-mail', with: 'jorge@email.com'
+    fill_in 'Senha', with: '12345678'
+    fill_in 'Confirme sua senha', with: '12345678'
+    click_on 'Criar Conta'
+    click_on 'Cade Buffet?'
+
+    expect(current_path).to eq new_buffet_path
+    expect(page).to have_content 'Cadastre seu buffet antes de prosseguir.'
+    expect(page).to have_content 'Novo Buffet'
+  end
 end
