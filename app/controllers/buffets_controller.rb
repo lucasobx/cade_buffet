@@ -13,6 +13,7 @@ class BuffetsController < ApplicationController
     @buffet = Buffet.new(buffet_params)
     @buffet.owner = current_owner
     if @buffet.save
+      @buffet.payment_methods << PaymentMethod.where(id: params[:buffet][:payment_method_ids])
       redirect_to root_path, notice: 'Buffet cadastrado com sucesso.'
     else
       flash.now[:notice] = 'Não foi possível cadastrar o Buffet.'
@@ -24,6 +25,7 @@ class BuffetsController < ApplicationController
 
   def update
     if @buffet.update(buffet_params)
+      @buffet.payment_methods = PaymentMethod.where(id: params[:buffet][:payment_method_ids])
       redirect_to @buffet, notice: 'Buffet atualizado com sucesso.'
     else
       flash.now[:notice] = 'Não foi possível atualizado o buffet.'
@@ -55,6 +57,7 @@ class BuffetsController < ApplicationController
       :city,
       :state,
       :postal_code,
-      :description)
+      :description,
+      :payment_method_ids)
   end
 end

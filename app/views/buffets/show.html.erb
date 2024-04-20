@@ -11,6 +11,8 @@
   <dt>Endereço:</dt>
   <dd><%= @buffet.address %> - <%= @buffet.neighborhood %>, <%= @buffet.city %> - 
   <%= @buffet.state %> - <%= @buffet.postal_code %></dd>
+  <dt>Métodos de pagamento aceitos:</dt>
+  <dd><%= @buffet.payment_methods.map(&:name).join(", ") %></dd>
 </dl>
 
 <% if owner_signed_in? && current_owner == @buffet.owner %>

@@ -35,3 +35,8 @@ Buffet.create!(
   postal_code: '55280-001',
   description: 'Buffet para festa infantil',
   owner: s_owner)
+
+PaymentMethod.create!(name: 'Pix')
+PaymentMethod.create!(name: 'Dinheiro')
+PaymentMethod.create!(name: 'Cartão de Crédito')
+PaymentMethod.create!(name: 'Cartão de Débito')

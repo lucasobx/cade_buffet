@@ -3,6 +3,9 @@ require 'rails_helper'
 describe 'Proprietário vê detalhes do Buffet' do
   it 'e vê informações adicionais' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+    credit = PaymentMethod.create!(name: 'Cartão de Crédito')
+    cash = PaymentMethod.create!(name: 'Dinheiro')
+    pix = PaymentMethod.create!(name: 'Pix')
     Buffet.create!(
       brand_name: 'Casamentos Buffet',
       corporate_name: 'Casamentos Buffet LTDA',
@@ -15,7 +18,9 @@ describe 'Proprietário vê detalhes do Buffet' do
       state: 'SP',
       postal_code: '14980-970',
       description: 'Buffet especializado em casamentos',
-      owner: owner)
+      owner: owner,
+      payment_methods: [pix, cash])
+
     
     visit root_path
     click_on 'Casamentos Buffet'
@@ -25,5 +30,6 @@ describe 'Proprietário vê detalhes do Buffet' do
     expect(page).to have_content 'Descrição: Buffet especializado em casamentos'
     expect(page).to have_content 'Contato: (11)00001111 - casabuffet@email.com'
     expect(page).to have_content 'Endereço: Av Machado, 650 - Jardim do Sol, Sales - SP - 14980-970'
+    expect(page).to have_content 'Métodos de pagamento aceitos: Pix, Dinheiro'
   end
 end

@@ -44,6 +44,13 @@
     <%= f.text_area :description %>
   </div>
   <div>
+    <h3>Métodos de Pagamento</h3>
+    <%= f.collection_check_boxes :payment_method_ids, PaymentMethod.all, :id, :name, { multiple: true } do |b| %>
+      <%= b.check_box %>
+      <%= b.label %>
+    <% end %>
+  </div>
+  <div>
     <%= f.submit 'Enviar' %>
   </div>
 <% end %>

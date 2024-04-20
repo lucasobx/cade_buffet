@@ -3,6 +3,8 @@ require 'rails_helper'
 describe 'Proprietário cadastra um Buffet' do
   it 'com sucesso' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+    PaymentMethod.create!(name: 'Cartão de Crédito')
+    PaymentMethod.create!(name: 'Pix')
 
     login_as(owner)
     visit root_path
@@ -17,6 +19,7 @@ describe 'Proprietário cadastra um Buffet' do
     fill_in 'Estado', with: 'SP'
     fill_in 'CEP', with: '14980-970'
     fill_in 'Descrição', with: 'Buffet especializado em casamentos'
+    check 'Pix'
     click_on 'Enviar'
 
     expect(page).to have_content 'Buffet cadastrado com sucesso.'
