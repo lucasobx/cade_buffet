@@ -12,8 +12,8 @@ class BuffetsController < ApplicationController
   def create
     @buffet = Buffet.new(buffet_params)
     @buffet.owner = current_owner
-    if @buffet.save
-      @buffet.payment_methods << PaymentMethod.where(id: params[:buffet][:payment_method_ids])
+    @buffet.payment_methods << PaymentMethod.where(id: params[:buffet][:payment_method_ids])
+    if @buffet.save 
       redirect_to root_path, notice: 'Buffet cadastrado com sucesso.'
     else
       flash.now[:notice] = 'Não foi possível cadastrar o Buffet.'

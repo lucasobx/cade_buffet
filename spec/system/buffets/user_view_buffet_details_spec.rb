@@ -19,7 +19,7 @@ describe 'Proprietário vê detalhes do Buffet' do
       postal_code: '14980-970',
       description: 'Buffet especializado em casamentos',
       owner: owner,
-      payment_methods: [pix, cash])
+      payment_methods: [cash, pix])
 
     
     visit root_path
@@ -30,6 +30,6 @@ describe 'Proprietário vê detalhes do Buffet' do
     expect(page).to have_content 'Descrição: Buffet especializado em casamentos'
     expect(page).to have_content 'Contato: (11)00001111 - casabuffet@email.com'
     expect(page).to have_content 'Endereço: Av Machado, 650 - Jardim do Sol, Sales - SP - 14980-970'
-    expect(page).to have_content 'Métodos de pagamento aceitos: Pix, Dinheiro'
+    expect(page).to have_content 'Métodos de pagamento aceitos: Dinheiro, Pix'
   end
 end

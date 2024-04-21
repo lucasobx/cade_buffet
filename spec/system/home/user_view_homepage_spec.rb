@@ -11,6 +11,8 @@ describe 'Usuário visita tela inicial' do
   it 'e vê os buffets cadastrados' do
     first_owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     second_owner = Owner.create!(name: 'Lara', email: 'lara@email.com', password: '87654321')
+    cash = PaymentMethod.create!(name: 'Dinheiro')
+    pix = PaymentMethod.create!(name: 'Pix')
     Buffet.create!(
       brand_name: 'Casamentos Buffet',
       corporate_name: 'Casamentos Buffet LTDA',
@@ -23,7 +25,8 @@ describe 'Usuário visita tela inicial' do
       state: 'SP',
       postal_code: '14980-970',
       description: 'Buffet especializado em casamentos',
-      owner: first_owner)
+      owner: first_owner,
+      payment_methods: [cash, pix])
     Buffet.create!(
       brand_name: 'Edecy Buffet',
       corporate_name: 'Edecy Buffet LTDA',
@@ -36,7 +39,8 @@ describe 'Usuário visita tela inicial' do
       state: 'MG',
       postal_code: '55280-001',
       description: 'Buffet para festa infantil',
-      owner: second_owner)
+      owner: second_owner,
+      payment_methods: [cash, pix])
 
     visit root_path
 

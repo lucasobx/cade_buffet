@@ -3,6 +3,8 @@ require 'rails_helper'
 describe 'Dono de Buffet se autentica' do
   it 'com sucesso' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+    cash = PaymentMethod.create!(name: 'Dinheiro')
+    pix = PaymentMethod.create!(name: 'Pix')
     Buffet.create!(
       brand_name: 'Casamentos Buffet',
       corporate_name: 'Casamentos Buffet LTDA',
@@ -15,7 +17,8 @@ describe 'Dono de Buffet se autentica' do
       state: 'SP',
       postal_code: '14980-970',
       description: 'Buffet especializado em casamentos',
-      owner: owner)
+      owner: owner,
+      payment_methods: [cash, pix])
 
     visit root_path
     click_on 'Entrar'
