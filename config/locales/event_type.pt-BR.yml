@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      event_type: "Tipo de Evento"
+    attributes:
+      event_type:
+        name: "Nome"
+        description: "Descrição"
+        min_guests: "Mínimo de Convidados"
+        max_guests: "Máximo de Convidados"
+        duration: "Duração"
+        menu_details: "Cardápio"
+        alcohol_option: "Bebidas Alcoólicas"
+        decoration_option: "Decoração"
+        parking_service_option: "Estacionamento"
+        location_option: "Local"

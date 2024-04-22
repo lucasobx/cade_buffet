@@ -1,0 +1,14 @@
+<% @event_types.each do |e| %>
+  <h3><%= e.name %></h3>
+  <p>Descrição: <%= e.description %></p>
+  <p>Capacidade: <%= e.min_guests %> a <%= e.max_guests %> convidados</p>
+  <p>Duração: <%= e.duration %> minutos</p>
+  <p>Cardápio: <%= e.menu_details %></p>
+  <p>Bebidas Alcoólicas: <%= e.alcohol_option ? "Sim" : "Não" %></p>
+  <p>Decoração: <%= e.decoration_option ? "Sim" : "Não" %></p>
+  <p>Estacionamento: <%= e.parking_service_option ? "Sim" : "Não" %></p>
+  <p>Escolha da Localização: <%= e.location_option ? "Sim" : "Não" %></p>
+  <%= link_to edit_buffet_event_type_path(@buffet, e) do %>
+    <p>Editar <%= e.name %></p>
+  <% end %>
+<% end %>

@@ -17,4 +17,8 @@
 
 <% if owner_signed_in? && current_owner == @buffet.owner %>
   <%= link_to 'Editar', edit_buffet_path %>
+  <%= link_to 'Cadastrar Tipo de Evento', new_buffet_event_type_path(@buffet.id) %>
 <% end %>
+
+<h2>Eventos Fornecidos</h2>
+<%= render partial: 'event_types', locals: { event_types: @event_types } %>

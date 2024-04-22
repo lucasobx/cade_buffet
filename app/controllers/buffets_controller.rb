@@ -3,7 +3,9 @@ class BuffetsController < ApplicationController
   before_action :authenticate_owner!, only: [:new, :create, :edit, :update]
   before_action :check_owner, only: [:edit, :update]
 
-  def show; end
+  def show
+    @event_types = @buffet.event_types
+  end
 
   def new
     @buffet = Buffet.new
