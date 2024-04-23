@@ -6,15 +6,15 @@ class EventTypesController < ApplicationController
   end
 
   def new
-    @event_type = EventType.new
     @buffet = Buffet.find(params[:buffet_id])
+    @event_type = EventType.new
   end
 
   def create
-    @event_type = EventType.new(event_type_params)
-    @event_type.buffet = current_owner.buffet
+    @buffet = Buffet.find(params[:buffet_id])
+    @event_type = @buffet.event_types.create(event_type_params)
     if @event_type.save
-      redirect_to @event_type.buffet, notice: 'Tipo de Evento cadastrado com sucesso.'
+      redirect_to @buffet, notice: 'Tipo de Evento cadastrado com sucesso.'
     else
       render 'new', status: 422
     end
