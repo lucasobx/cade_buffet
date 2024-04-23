@@ -20,9 +20,7 @@ class EventTypesController < ApplicationController
     end
   end
 
-  def edit
-    @buffet = Buffet.find(params[:buffet_id])
-  end
+  def edit; end
 
   def update
     if @event_type.update(event_type_params)

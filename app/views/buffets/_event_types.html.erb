@@ -8,7 +8,7 @@
   <p>Decoração: <%= e.decoration_option ? "Sim" : "Não" %></p>
   <p>Estacionamento: <%= e.parking_service_option ? "Sim" : "Não" %></p>
   <p>Escolha da Localização: <%= e.location_option ? "Sim" : "Não" %></p>
-  <%= link_to edit_buffet_event_type_path(@buffet, e) do %>
+  <%= link_to edit_event_type_path(e) do %>
     <p>Editar <%= e.name %></p>
   <% end %>
 <% end %>
