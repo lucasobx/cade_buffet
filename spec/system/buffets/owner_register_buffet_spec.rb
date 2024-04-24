@@ -26,4 +26,20 @@ describe 'Proprietário cadastra um Buffet' do
     expect(page).to have_content 'Casamentos Buffet'
     expect(page).to have_content 'Sales, SP'
   end
+
+  it 'e deve preencher todos os campos' do
+    owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+    PaymentMethod.create!(name: 'Cartão de Crédito')
+    PaymentMethod.create!(name: 'Pix')
+
+    login_as(owner)
+    visit root_path
+    fill_in 'Nome Fantasia', with: ''
+    fill_in 'Razão Social', with: ''
+    click_on 'Enviar'
+
+    expect(page).to have_content 'Não foi possível cadastrar o Buffet.'
+    expect(page).to have_content 'Nome Fantasia não pode ficar em branco'
+    expect(page).to have_content 'Razão Social não pode ficar em branco'
+  end
 end

@@ -16,6 +16,7 @@ class EventTypesController < ApplicationController
     if @event_type.save
       redirect_to @buffet, notice: 'Tipo de Evento cadastrado com sucesso.'
     else
+      flash.now[:notice] = 'Não foi possível cadastrar o tipo de evento.'
       render 'new', status: 422
     end
   end
@@ -26,6 +27,7 @@ class EventTypesController < ApplicationController
     if @event_type.update(event_type_params)
       redirect_to @event_type.buffet, notice: 'Tipo de Evento atualizado com sucesso.'
     else
+      flash.now[:notice] = 'Não foi possível atualizar o tipo de evento.'
       render 'edit', status: 422
     end
   end

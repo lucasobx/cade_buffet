@@ -30,7 +30,7 @@ class BuffetsController < ApplicationController
       @buffet.payment_methods = PaymentMethod.where(id: params[:buffet][:payment_method_ids])
       redirect_to @buffet, notice: 'Buffet atualizado com sucesso.'
     else
-      flash.now[:notice] = 'Não foi possível atualizado o buffet.'
+      flash.now[:notice] = 'Não foi possível atualizar o buffet.'
       render 'new', status: 422
     end
   end
