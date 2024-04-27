@@ -1,14 +1,33 @@
 <% @event_types.each do |e| %>
-  <h3><%= e.name %></h3>
-  <p>Descrição: <%= e.description %></p>
-  <p>Capacidade: <%= e.min_guests %> a <%= e.max_guests %> convidados</p>
-  <p>Duração: <%= e.duration %> minutos</p>
-  <p>Cardápio: <%= e.menu_details %></p>
-  <p>Bebidas Alcoólicas: <%= e.alcohol_option ? "Sim" : "Não" %></p>
-  <p>Decoração: <%= e.decoration_option ? "Sim" : "Não" %></p>
-  <p>Estacionamento: <%= e.parking_service_option ? "Sim" : "Não" %></p>
-  <p>Escolha da Localização: <%= e.location_option ? "Sim" : "Não" %></p>
+  <div>
+    <h3><%= e.name %></h3>
+    <dl>
+      <dt>Descrição:</dt>
+      <dd><%= e.description %></dd>
+      <dt>Capacidade:</dt>
+      <dd><%= e.min_guests %> a <%= e.max_guests %> convidados</dd>
+      <dt>Duração:</dt>
+      <dd><%= e.duration %> minutos</dd>
+      <dt>Cardápio:</dt>
+      <dd><%= e.menu_details %></dd>
+      <dt>Bebidas Alcoólicas:</dt>
+      <dd><%= e.alcohol_option ? "Sim" : "Não" %></dd>
+      <dt>Decoração:</dt>
+      <dd><%= e.decoration_option ? "Sim" : "Não" %></dd>
+      <dt>Estacionamento:</dt>
+      <dd><%= e.parking_service_option ? "Sim" : "Não" %></dd>
+      <dt>Escolha da Localização:</dt>
+      <dd><%= e.location_option ? "Sim" : "Não" %></dd>
+    </dl>
+  </div>
+  <div>
+    <p>Preço Base para <%= e.min_guests %> Convidados: R$<%= e.base_price %> - Fim de Semana: R$<%= e.we_base_price %></p>
+    <p>Taxa por Pessoa Excedente: R$<%= e.extra_guest %> - Fim de Semana: R$<%= e.we_extra_guest %></p>
+    <p>Taxa por Hora Extra: R$<%= e.extra_hour %> - Fim de Semana: R$<%= e.we_extra_hour %></p>
+  </div>
+  <div>
   <%= link_to edit_event_type_path(e) do %>
     <p>Editar <%= e.name %></p>
   <% end %>
+  </div>
 <% end %>

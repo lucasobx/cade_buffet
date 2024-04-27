@@ -4,9 +4,11 @@ class Owner < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one :buffet
+
+  validates :name, presence: true
+
   def description
     "#{name} - #{email}"
   end
-
-  has_one :buffet
 end

@@ -8,5 +8,5 @@ class Buffet < ApplicationRecord
             :email, :address, :neighborhood, :city, :state, :postal_code,
             :description, :payment_methods, presence: true
             
-  validates :registration_code, uniqueness: true
+  validates :registration_code, uniqueness: true 
 end

@@ -8,4 +8,12 @@ RSpec.describe Owner, type: :model do
       expect(owner.description).to eq 'Jorge - jorge@email.com'
     end
   end
+
+  describe '#valid?' do
+    it 'retorna falso quando o nome está vazio' do
+      owner = Owner.new(name: '', email: 'jorge@email.com', password: '12345678')
+
+      expect(owner.valid?).to be false
+    end
+  end
 end

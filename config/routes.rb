@@ -4,6 +4,5 @@ Rails.application.routes.draw do
   resources :buffets, only: [:show, :new, :create, :edit, :update] do
     resources :event_types, only: [:index, :new, :create]
   end
-
   resources :event_types, only: [:edit, :update]
 end

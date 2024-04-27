@@ -49,6 +49,12 @@ class EventTypesController < ApplicationController
       :alcohol_option,
       :decoration_option,
       :parking_service_option,
-      :location_option,)
+      :location_option,
+      :base_price,
+      :extra_guest,
+      :extra_hour,
+      :we_base_price,
+      :we_extra_guest,
+      :we_extra_hour)
   end
 end

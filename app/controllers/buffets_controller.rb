@@ -1,6 +1,7 @@
 class BuffetsController < ApplicationController
   before_action :set_buffet, only: [:show, :edit, :update]
   before_action :authenticate_owner!, only: [:new, :create, :edit, :update]
+  before_action :check_existing_buffet, only: [:new, :create]
   before_action :check_owner, only: [:edit, :update]
 
   def show
@@ -40,6 +41,12 @@ class BuffetsController < ApplicationController
   def check_owner
     unless current_owner == @buffet.owner
       redirect_to root_path
+    end
+  end
+
+  def check_existing_buffet
+    if current_owner.buffet
+      redirect_to root_path, alert: 'Você já cadastrou um buffet.'
     end
   end
 

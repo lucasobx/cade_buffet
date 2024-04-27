@@ -42,4 +42,30 @@ describe 'Proprietário cadastra um Buffet' do
     expect(page).to have_content 'Nome Fantasia não pode ficar em branco'
     expect(page).to have_content 'Razão Social não pode ficar em branco'
   end
+
+  it 'e não pode cadastrar um segundo buffet' do
+    owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+    credit = PaymentMethod.create!(name: 'Cartão de Crédito')
+    cash = PaymentMethod.create!(name: 'Dinheiro')
+    Buffet.create!(
+      brand_name: 'Casamentos Buffet',
+      corporate_name: 'Casamentos Buffet LTDA',
+      registration_code: '73456164000100',
+      phone_number: '(11)00001111',
+      email: 'casabuffet@email.com',
+      address: 'Av Machado, 650',
+      neighborhood: 'Jardim do Sol',
+      city: 'Sales',
+      state: 'SP',
+      postal_code: '14980-970',
+      description: 'Buffet especializado em casamentos',
+      owner: owner,
+      payment_methods: [credit, cash])
+    
+    login_as(owner)
+    visit new_buffet_path
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você já cadastrou um buffet.'
+  end
 end

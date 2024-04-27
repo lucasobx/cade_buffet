@@ -30,7 +30,13 @@ describe 'Proprietário edita tipo de evento' do
       decoration_option: true,
       parking_service_option: true,
       location_option: false,
-      buffet: buffet)
+      buffet: buffet,
+      base_price: 10000.0,
+      extra_guest: 250.0,
+      extra_hour: 1000.0,
+      we_base_price: 15000.0,
+      we_extra_guest: 400.0,
+      we_extra_hour: 1500.0)
 
     login_as(owner)
     visit root_path
@@ -80,7 +86,13 @@ describe 'Proprietário edita tipo de evento' do
       decoration_option: true,
       parking_service_option: true,
       location_option: false,
-      buffet: buffet)
+      buffet: buffet,
+      base_price: 10000.0,
+      extra_guest: 250.0,
+      extra_hour: 1000.0,
+      we_base_price: 15000.0,
+      we_extra_guest: 400.0,
+      we_extra_hour: 1500.0)
 
     login_as(owner)
     visit root_path
@@ -90,9 +102,11 @@ describe 'Proprietário edita tipo de evento' do
     click_on 'Editar Festa de Casamento'
     fill_in 'Mínimo de Convidados', with: '30'
     fill_in 'Máximo de Convidados', with: '250'
+    fill_in 'Preço Base', with: '8000'
     click_on 'Enviar'
 
     expect(page).to have_content 'Tipo de Evento atualizado com sucesso.'
     expect(page).to have_content 'Capacidade: 30 a 250 convidados'
+    expect(page).to have_content 'Preço Base para 30 Convidados: R$8000.0'
   end
 end

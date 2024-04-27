@@ -38,6 +38,12 @@ describe 'Proprietário cadastra tipo de evento' do
     expect(page).to have_content 'Bebidas Alcoólicas'
     expect(page).to have_content 'Decoração'
     expect(page).to have_content 'Estacionamento'
+    expect(page).to have_content 'Preço Base'
+    expect(page).to have_content 'Taxa por Pessoa Excedente'
+    expect(page).to have_content 'Taxa por Hora Extra'
+    expect(page).to have_content 'Preço no Fim de Semana'
+    expect(page).to have_content 'Taxa por Pessoa Excedente no Fim de Semana'
+    expect(page).to have_content 'Taxa por Hora Extra no Fim de Semana'
     expect(page).to have_content 'Local'
   end
 
@@ -45,7 +51,7 @@ describe 'Proprietário cadastra tipo de evento' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')
     pix = PaymentMethod.create!(name: 'Pix')
-    buffet = Buffet.create!(
+    Buffet.create!(
       brand_name: 'Casamentos Buffet',
       corporate_name: 'Casamentos Buffet LTDA',
       registration_code: '73456164000100',
@@ -75,6 +81,12 @@ describe 'Proprietário cadastra tipo de evento' do
     check 'Bebidas Alcoólicas'
     check 'Decoração'
     check 'Estacionamento'
+    fill_in 'Preço Base', with: '10000'
+    fill_in 'Taxa por Pessoa Excedente', with: '250'
+    fill_in 'Taxa por Hora Extra', with: '1000'
+    fill_in 'Preço no Fim de Semana', with: '15000'
+    fill_in 'Taxa por Pessoa Excedente no Fim de Semana', with: '400'
+    fill_in 'Taxa por Hora Extra no Fim de Semana', with: '1500'
     click_on 'Enviar'
 
     expect(page).to have_content 'Tipo de Evento cadastrado com sucesso.'
@@ -87,13 +99,16 @@ describe 'Proprietário cadastra tipo de evento' do
     expect(page).to have_content 'Decoração: Sim'
     expect(page).to have_content 'Estacionamento: Sim'
     expect(page).to have_content 'Escolha da Localização: Não'
+    expect(page).to have_content 'Preço Base para 15 Convidados: R$10000.0 - Fim de Semana: R$15000.0'
+    expect(page).to have_content 'Taxa por Pessoa Excedente: R$250.0 - Fim de Semana: R$400.0'
+    expect(page).to have_content 'Taxa por Hora Extra: R$1000.0 - Fim de Semana: R$1500.0'
   end
 
   it 'e deve preencher todos os campos' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')
     pix = PaymentMethod.create!(name: 'Pix')
-    buffet = Buffet.create!(
+    Buffet.create!(
       brand_name: 'Casamentos Buffet',
       corporate_name: 'Casamentos Buffet LTDA',
       registration_code: '73456164000100',
@@ -116,10 +131,12 @@ describe 'Proprietário cadastra tipo de evento' do
     click_on 'Cadastrar Tipo de Evento'
     fill_in 'Nome', with: ''
     fill_in 'Descrição', with: ''
+    fill_in 'Preço Base', with: ''
     click_on 'Enviar'
 
     expect(page).to have_content 'Não foi possível cadastrar o tipo de evento.'
     expect(page).to have_content 'Nome não pode ficar em branco'
     expect(page).to have_content 'Descrição não pode ficar em branco'
+    expect(page).to have_content 'Preço Base não pode ficar em branco'
   end
 end
