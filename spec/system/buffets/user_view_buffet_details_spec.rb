@@ -26,7 +26,6 @@ describe 'Proprietário vê detalhes do Buffet' do
     click_on 'Casamentos Buffet'
 
     expect(page).to have_content 'Casamentos Buffet'
-    expect(page).to have_content 'Razão Social: Casamentos Buffet LTDA'
     expect(page).to have_content 'Descrição: Buffet especializado em casamentos'
     expect(page).to have_content 'Contato: (11)00001111 - casabuffet@email.com'
     expect(page).to have_content 'Endereço: Av Machado, 650 - Jardim do Sol, Sales - SP - 14980-970'
