@@ -36,6 +36,14 @@ class BuffetsController < ApplicationController
     end
   end
 
+  def search
+    @name = params["query"]
+    @buffets = Buffet.joins(:event_types)
+                     .where("buffets.brand_name LIKE :name OR buffets.city LIKE :name OR event_types.name LIKE :name", name: "%#{@name}%")
+                     .distinct
+                     .order(:brand_name)
+  end
+
   private
 
   def check_owner

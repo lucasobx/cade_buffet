@@ -22,7 +22,7 @@ describe 'Dono de Buffet se autentica' do
 
     visit root_path
     click_on 'Dono de Buffet'
-    within 'form' do
+    within '#login-form' do
       fill_in 'E-mail', with: 'jorge@email.com'
       fill_in 'Senha', with: '12345678'
       click_on 'Entrar'
@@ -41,7 +41,7 @@ describe 'Dono de Buffet se autentica' do
 
     visit root_path
     click_on 'Dono de Buffet'
-    within 'form' do
+    within '#login-form' do
       fill_in 'E-mail', with: 'jorge@email.com'
       fill_in 'Senha', with: '12345678'
       click_on 'Entrar'

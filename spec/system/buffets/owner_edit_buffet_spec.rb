@@ -106,7 +106,7 @@ describe 'Dono de Buffet edita um buffet' do
       city: 'Belo Horizonte',
       state: 'MG',
       postal_code: '55280-001',
-      description: 'Buffet para festa infantil',
+      description: 'Buffet especializado em festa infantil',
       owner: second_owner,
       payment_methods: [credit, cash])
 

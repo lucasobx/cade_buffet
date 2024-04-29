@@ -6,7 +6,7 @@ describe 'Cliente se autentica' do
 
     visit root_path
     click_on 'Entrar Como Cliente'
-    within 'form' do
+    within '#login-form' do
       fill_in 'E-mail', with: 'julia@email.com'
       fill_in 'Senha', with: '12345678'
       click_on 'Entrar'
@@ -25,7 +25,7 @@ describe 'Cliente se autentica' do
 
     visit root_path
     click_on 'Entrar Como Cliente'
-    within 'form' do
+    within '#login-form' do
       fill_in 'E-mail', with: 'julia@email.com'
       fill_in 'Senha', with: '12345678'
       click_on 'Entrar'
