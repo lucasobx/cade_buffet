@@ -5,7 +5,15 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    if resource_name == :owner
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    end
+
+    if resource_name == :client
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :personal_code])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :personal_code])
+    end
   end
 
   private

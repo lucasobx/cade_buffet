@@ -20,7 +20,7 @@ describe 'Proprietário cadastra tipo de evento' do
       owner: owner,
       payment_methods: [cash, pix])
 
-    login_as(owner)
+    login_as(owner, scope: :owner)
     visit root_path
     within 'nav' do
       click_on 'Meu Buffet'
@@ -66,7 +66,7 @@ describe 'Proprietário cadastra tipo de evento' do
       owner: owner,
       payment_methods: [cash, pix])
 
-    login_as(owner)
+    login_as(owner, scope: :owner)
     visit root_path
     within 'nav' do
       click_on 'Meu Buffet'
@@ -123,7 +123,7 @@ describe 'Proprietário cadastra tipo de evento' do
       owner: owner,
       payment_methods: [cash, pix])
 
-    login_as(owner)
+    login_as(owner, scope: :owner)
     visit root_path
     within 'nav' do
       click_on 'Meu Buffet'

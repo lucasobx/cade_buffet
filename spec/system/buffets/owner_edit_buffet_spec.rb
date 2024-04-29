@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Proprietário edita um buffet' do
+describe 'Dono de Buffet edita um buffet' do
   it 'a partir da página de detalhes' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     credit = PaymentMethod.create!(name: 'Cartão de Crédito')
@@ -20,9 +20,9 @@ describe 'Proprietário edita um buffet' do
       owner: owner,
       payment_methods: [credit, cash])
     
-    login_as(owner)
+    login_as(owner, scope: :owner)
     visit root_path
-    click_on 'Casamentos Buffet'
+    click_on 'Meu Buffet'
     click_on 'Editar'
 
     expect(page).to have_content 'Editar Buffet'
@@ -60,9 +60,9 @@ describe 'Proprietário edita um buffet' do
       owner: owner,
       payment_methods: [credit, cash])
     
-    login_as(owner)
+    login_as(owner, scope: :owner)
     visit root_path
-    click_on 'Casamentos Buffet'
+    click_on 'Meu Buffet'
     click_on 'Editar'
     fill_in 'Nome Fantasia', with: 'Casa Buffet'
     fill_in 'Endereço', with: 'Av Pedra Grande, 55'
@@ -95,7 +95,7 @@ describe 'Proprietário edita um buffet' do
       description: 'Buffet especializado em casamentos',
       owner: owner,
       payment_methods: [credit, cash])
-    second_buffet = Buffet.create!(
+    Buffet.create!(
       brand_name: 'Edecy Buffet',
       corporate_name: 'Edecy Buffet LTDA',
       registration_code: '55996244000122',
@@ -110,7 +110,7 @@ describe 'Proprietário edita um buffet' do
       owner: second_owner,
       payment_methods: [credit, cash])
 
-      login_as(second_owner)
+      login_as(second_owner, scope: :owner)
       visit edit_buffet_path(buffet)
       
       expect(current_path).not_to eq edit_buffet_path(buffet)

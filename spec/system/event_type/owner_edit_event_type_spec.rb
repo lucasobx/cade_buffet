@@ -38,7 +38,7 @@ describe 'Proprietário edita tipo de evento' do
       we_extra_guest: 400.0,
       we_extra_hour: 1500.0)
 
-    login_as(owner)
+    login_as(owner, scope: :owner)
     visit root_path
     within 'nav' do
       click_on 'Meu Buffet'
@@ -94,7 +94,7 @@ describe 'Proprietário edita tipo de evento' do
       we_extra_guest: 400.0,
       we_extra_hour: 1500.0)
 
-    login_as(owner)
+    login_as(owner, scope: :owner)
     visit root_path
     within 'nav' do
       click_on 'Meu Buffet'

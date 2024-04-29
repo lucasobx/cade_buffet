@@ -1,5 +1,7 @@
 class EventTypesController < ApplicationController
   before_action :set_event_type, only: [:edit, :update]
+  before_action :authenticate_owner!, only: [:new, :create, :edit, :update]
+  before_action :check_owner, only: [:edit, :update]
 
   def index
     @event_types = EventType.all
@@ -33,6 +35,12 @@ class EventTypesController < ApplicationController
   end
 
   private
+
+  def check_owner
+    unless current_owner == @event_type.buffet.owner
+      redirect_to root_path
+    end
+  end
 
   def set_event_type
     @event_type = EventType.find(params[:id])

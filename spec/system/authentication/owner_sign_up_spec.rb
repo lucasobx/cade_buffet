@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Dono de Buffet cria uma conta' do
   it 'com sucesso' do
     visit root_path
-    click_on 'Entrar'
+    click_on 'Dono de Buffet'
     click_on 'Criar uma conta'
     fill_in 'Nome', with: 'Jorge'
     fill_in 'E-mail', with: 'jorge@email.com'
@@ -20,7 +20,7 @@ describe 'Dono de Buffet cria uma conta' do
 
   it 'e é redirecionado para o cadastro de buffet' do
     visit root_path
-    click_on 'Entrar'
+    click_on 'Dono de Buffet'
     click_on 'Criar uma conta'
     fill_in 'Nome', with: 'Jorge'
     fill_in 'E-mail', with: 'jorge@email.com'

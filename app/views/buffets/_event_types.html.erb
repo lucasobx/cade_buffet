@@ -26,8 +26,10 @@
     <p>Taxa por Hora Extra: R$<%= e.extra_hour %> - Fim de Semana: R$<%= e.we_extra_hour %></p>
   </div>
   <div>
-  <%= link_to edit_event_type_path(e) do %>
-    <p>Editar <%= e.name %></p>
-  <% end %>
+    <% if owner_signed_in? && current_owner == @buffet.owner %>
+      <%= link_to edit_event_type_path(e) do %>
+        <p>Editar <%= e.name %></p>
+      <% end %>
+    <% end %>
   </div>
 <% end %>

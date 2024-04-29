@@ -9,6 +9,7 @@
 #   end
 f_owner = Owner.create!(name: 'Lucas', email: 'lucas@email.com', password: '12345678')
 s_owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '87654321')
+client = Client.create!(name: 'Julia', personal_code: '47406693079', email: 'julia@email.com', password: '12345678')
 
 pix = PaymentMethod.create!(name: 'Pix')
 cash = PaymentMethod.create!(name: 'Dinheiro')
