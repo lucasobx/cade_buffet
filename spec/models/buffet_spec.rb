@@ -7,263 +7,168 @@ RSpec.describe Buffet, type: :model do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: '',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '73456164000100',
-          phone_number: '(11)00001111',
-          email: 'casabuffet@email.com',
-          address: 'Av Machado, 650',
-          neighborhood: 'Jardim do Sol',
-          city: 'Sales',
-          state: 'SP',
-          postal_code: '14980-970',
-          description: 'Buffet especializado em casamentos',
-          owner: owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.new(brand_name: '', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casab@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :brand_name).to eq true
       end
 
       it 'Razão Social é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: '',
-          registration_code: '73456164000100',
-          phone_number: '(11)00001111',
-          email: 'casabuffet@email.com',
-          address: 'Av Machado, 650',
-          neighborhood: 'Jardim do Sol',
-          city: 'Sales',
-          state: 'SP',
-          postal_code: '14980-970',
-          description: 'Buffet especializado em casamentos',
-          owner: owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.new(brand_name: 'Casamentos Buffet', corporate_name: '',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casab@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :corporate_name).to eq true
       end
 
       it 'CNPJ é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '',
-          phone_number: '(11)00001111',
-          email: 'casabuffet@email.com',
-          address: 'Av Machado, 650',
-          neighborhood: 'Jardim do Sol',
-          city: 'Sales',
-          state: 'SP',
-          postal_code: '14980-970',
-          description: 'Buffet especializado em casamentos',
-          owner: owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.new(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '', phone_number: '(11)00001111', email: 'casab@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :registration_code).to eq true
       end
 
       it 'Telefone é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '73456164000100',
-          phone_number: '',
-          email: 'casabuffet@email.com',
-          address: 'Av Machado, 650',
-          neighborhood: 'Jardim do Sol',
-          city: 'Sales',
-          state: 'SP',
-          postal_code: '14980-970',
-          description: 'Buffet especializado em casamentos',
-          owner: owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.new(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '', email: 'casab@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :phone_number).to eq true
       end
 
       it 'E-mail é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '73456164000100',
-          phone_number: '(11)00001111',
-          email: '',
-          address: 'Av Machado, 650',
-          neighborhood: 'Jardim do Sol',
-          city: 'Sales',
-          state: 'SP',
-          postal_code: '14980-970',
-          description: 'Buffet especializado em casamentos',
-          owner: owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.new(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: '',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :email).to eq true
       end
 
       it 'Endereço é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '73456164000100',
-          phone_number: '(11)00001111',
-          email: 'casabuffet@email.com',
-          address: '',
-          neighborhood: 'Jardim do Sol',
-          city: 'Sales',
-          state: 'SP',
-          postal_code: '14980-970',
-          description: 'Buffet especializado em casamentos',
-          owner: owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.new(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casab@email.com',
+                            address: '', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :address).to eq true
       end
 
       it 'Bairro é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '73456164000100',
-          phone_number: '(11)00001111',
-          email: 'casabuffet@email.com',
-          address: 'Av Machado, 650',
-          neighborhood: '',
-          city: 'Sales',
-          state: 'SP',
-          postal_code: '14980-970',
-          description: 'Buffet especializado em casamentos',
-          owner: owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.new(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casab@email.com',
+                            address: 'Av Machado, 650', neighborhood: '', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :neighborhood).to eq true
       end
 
       it 'Cidade é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '73456164000100',
-          phone_number: '(11)00001111',
-          email: 'casabuffet@email.com',
-          address: 'Av Machado, 650',
-          neighborhood: 'Jardim do Sol',
-          city: '',
-          state: 'SP',
-          postal_code: '14980-970',
-          description: 'Buffet especializado em casamentos',
-          owner: owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.new(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casab@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: '', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :city).to eq true
       end
 
       it 'Estado é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '73456164000100',
-          phone_number: '(11)00001111',
-          email: 'casabuffet@email.com',
-          address: 'Av Machado, 650',
-          neighborhood: 'Jardim do Sol',
-          city: 'Sales',
-          state: '',
-          postal_code: '14980-970',
-          description: 'Buffet especializado em casamentos',
-          owner: owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.new(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casab@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: '',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :state).to eq true
       end
 
       it 'CEP é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '73456164000100',
-          phone_number: '(11)00001111',
-          email: 'casabuffet@email.com',
-          address: 'Av Machado, 650',
-          neighborhood: 'Jardim do Sol',
-          city: 'Sales',
-          state: 'SP',
-          postal_code: '',
-          description: 'Buffet especializado em casamentos',
-          owner: owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.new(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casab@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :postal_code).to eq true
       end
 
       it 'Descrição é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '73456164000100',
-          phone_number: '(11)00001111',
-          email: 'casabuffet@email.com',
-          address: 'Av Machado, 650',
-          neighborhood: 'Jardim do Sol',
-          city: 'Sales',
-          state: 'SP',
-          postal_code: '14980-970',
-          description: '',
-          owner: owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.new(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casab@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: '',
+                            owner: owner, payment_methods: [cash, pix])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :description).to eq true
       end
 
       it 'Método de pagamento é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
-        cash = PaymentMethod.create!(name: 'Dinheiro')
-        pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.new(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '73456164000100',
-          phone_number: '(11)00001111',
-          email: 'casabuffet@email.com',
-          address: 'Av Machado, 650',
-          neighborhood: 'Jardim do Sol',
-          city: 'Sales',
-          state: 'SP',
-          postal_code: '14980-970',
-          description: 'Buffet especializado em casamentos',
-          owner: owner)
+        PaymentMethod.create!(name: 'Dinheiro')
+        PaymentMethod.create!(name: 'Pix')
+        buffet = Buffet.new(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casab@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [])
 
-        expect(buffet.valid?).to eq false
+        buffet.valid?
+        expect(buffet.errors.include? :payment_methods).to eq true
       end
     end
 
@@ -273,36 +178,18 @@ RSpec.describe Buffet, type: :model do
         second_owner = Owner.create!(name: 'Julia', email: 'julia@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
-        buffet = Buffet.create!(
-          brand_name: 'Casamentos Buffet',
-          corporate_name: 'Casamentos Buffet LTDA',
-          registration_code: '73456164000100',
-          phone_number: '(11)00001111',
-          email: 'casabuffet@email.com',
-          address: 'Av Machado, 650',
-          neighborhood: 'Jardim do Sol',
-          city: 'Sales',
-          state: 'SP',
-          postal_code: '14980-970',
-          description: 'Buffet especializado em casamentos',
-          owner: owner,
-          payment_methods: [cash, pix])
-        second_buffet = Buffet.new(
-          brand_name: 'Buffet da Julia',
-          corporate_name: 'Buffet da Julia LTDA',
-          registration_code: '73456164000100',
-          phone_number: '(62)88887755',
-          email: 'juliabuffet@email.com',
-          address: 'Av Corifeu, 10',
-          neighborhood: 'Butantã',
-          city: 'São Paulo',
-          state: 'SP',
-          postal_code: '056980-070',
-          description: 'Buffet especializado em festas infantis',
-          owner: second_owner,
-          payment_methods: [cash, pix])
+        buffet = Buffet.create!(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                                registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casab@email.com',
+                                address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                                postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                                owner: owner, payment_methods: [cash, pix])
+        s_buffet = Buffet.new(brand_name: 'Buffet da Julia', corporate_name: 'Buffet da Julia LTDA',
+                              registration_code: '73456164000100', phone_number: '(62)88887755', email: 'jbuffet@email.com',
+                              address: 'Av Corifeu, 10', neighborhood: 'Butantã', city: 'São Paulo', state: 'SP',
+                              postal_code: '056980-070', description: 'Buffet especializado em festas infantis',
+                              owner: second_owner, payment_methods: [cash, pix])                            
 
-        expect(second_buffet.valid?).to eq false
+        expect(s_buffet.valid?).to eq false
       end
     end
   end

@@ -39,9 +39,8 @@ class BuffetsController < ApplicationController
   def search
     @name = params["query"]
     @buffets = Buffet.joins(:event_types)
-                     .where("buffets.brand_name LIKE :name OR buffets.city LIKE :name OR event_types.name LIKE :name", name: "%#{@name}%")
-                     .distinct
-                     .order(:brand_name)
+                     .where("buffets.brand_name LIKE :name OR buffets.city LIKE :name OR event_types.name LIKE :name",
+                            name: "%#{@name}%").distinct.order(:brand_name)
   end
 
   private
@@ -63,18 +62,7 @@ class BuffetsController < ApplicationController
   end
 
   def buffet_params
-    params.require(:buffet).permit(
-      :brand_name,
-      :corporate_name,
-      :registration_code,
-      :phone_number,
-      :email,
-      :address,
-      :neighborhood,
-      :city,
-      :state,
-      :postal_code,
-      :description,
-      :payment_method_ids)
+    params.require(:buffet).permit(:brand_name, :corporate_name, :registration_code, :phone_number, :email, :address,
+                                   :neighborhood, :city, :state, :postal_code, :description, :payment_method_ids)
   end
 end

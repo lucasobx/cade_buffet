@@ -5,20 +5,11 @@ describe 'Dono de Buffet edita um buffet' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     credit = PaymentMethod.create!(name: 'Cartão de Crédito')
     cash = PaymentMethod.create!(name: 'Dinheiro')
-    Buffet.create!(
-      brand_name: 'Casamentos Buffet',
-      corporate_name: 'Casamentos Buffet LTDA',
-      registration_code: '73456164000100',
-      phone_number: '(11)00001111',
-      email: 'casabuffet@email.com',
-      address: 'Av Machado, 650',
-      neighborhood: 'Jardim do Sol',
-      city: 'Sales',
-      state: 'SP',
-      postal_code: '14980-970',
-      description: 'Buffet especializado em casamentos',
-      owner: owner,
-      payment_methods: [credit, cash])
+    Buffet.create!(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                   registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casabuffet@email.com',
+                   address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                   postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                   owner: owner, payment_methods: [credit, cash])
     
     login_as(owner, scope: :owner)
     visit root_path
@@ -45,20 +36,11 @@ describe 'Dono de Buffet edita um buffet' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     credit = PaymentMethod.create!(name: 'Cartão de Crédito')
     cash = PaymentMethod.create!(name: 'Dinheiro')
-    Buffet.create!(
-      brand_name: 'Casamentos Buffet',
-      corporate_name: 'Casamentos Buffet LTDA',
-      registration_code: '73456164000100',
-      phone_number: '(11)00001111',
-      email: 'casabuffet@email.com',
-      address: 'Av Machado, 650',
-      neighborhood: 'Jardim do Sol',
-      city: 'Sales',
-      state: 'SP',
-      postal_code: '14980-970',
-      description: 'Buffet especializado em casamentos',
-      owner: owner,
-      payment_methods: [credit, cash])
+    Buffet.create!(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                   registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casabuffet@email.com',
+                   address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                   postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                   owner: owner, payment_methods: [credit, cash])
     
     login_as(owner, scope: :owner)
     visit root_path
@@ -81,34 +63,16 @@ describe 'Dono de Buffet edita um buffet' do
     second_owner = Owner.create!(name: 'Julia', email: 'julia@email.com', password: '45688520')
     credit = PaymentMethod.create!(name: 'Cartão de Crédito')
     cash = PaymentMethod.create!(name: 'Dinheiro')
-    buffet = Buffet.create!(
-      brand_name: 'Casamentos Buffet',
-      corporate_name: 'Casamentos Buffet LTDA',
-      registration_code: '73456164000100',
-      phone_number: '(11)00001111',
-      email: 'casabuffet@email.com',
-      address: 'Av Machado, 650',
-      neighborhood: 'Jardim do Sol',
-      city: 'Sales',
-      state: 'SP',
-      postal_code: '14980-970',
-      description: 'Buffet especializado em casamentos',
-      owner: owner,
-      payment_methods: [credit, cash])
-    Buffet.create!(
-      brand_name: 'Edecy Buffet',
-      corporate_name: 'Edecy Buffet LTDA',
-      registration_code: '55996244000122',
-      phone_number: '(11)22229988',
-      email: 'edecy@email.com',
-      address: 'Rua Castilho, 560',
-      neighborhood: 'Piratininga',
-      city: 'Belo Horizonte',
-      state: 'MG',
-      postal_code: '55280-001',
-      description: 'Buffet especializado em festa infantil',
-      owner: second_owner,
-      payment_methods: [credit, cash])
+    buffet = Buffet.create!(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casabuffet@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [credit, cash])
+    Buffet.create!(brand_name: 'Edecy Buffet', corporate_name: 'Edecy Buffet LTDA',
+                   registration_code: '55996244000122', phone_number: '(11)22229988', email: 'edecy@email.com',
+                   address: 'Rua Castilho, 560', neighborhood: 'Piratininga', city: 'Belo Horizonte', state: 'MG',
+                   postal_code: '55280-001', description: 'Buffet especializado em festa infantil',
+                   owner: second_owner, payment_methods: [credit, cash])
 
       login_as(second_owner, scope: :owner)
       visit edit_buffet_path(buffet)
