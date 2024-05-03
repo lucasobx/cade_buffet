@@ -1,9 +1,8 @@
 require 'rails_helper'
 
-describe 'Proprietário vê detalhes do Buffet' do
+describe 'Visitante visita detalhes do buffet' do
   it 'e vê informações adicionais' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
-    credit = PaymentMethod.create!(name: 'Cartão de Crédito')
     cash = PaymentMethod.create!(name: 'Dinheiro')
     pix = PaymentMethod.create!(name: 'Pix')
     Buffet.create!(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',

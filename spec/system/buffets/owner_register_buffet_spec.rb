@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Proprietário cadastra um Buffet' do
+describe 'Dono de Buffet cadastra um buffet' do
   it 'com sucesso' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     PaymentMethod.create!(name: 'Cartão de Crédito')
