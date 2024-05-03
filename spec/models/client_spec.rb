@@ -10,14 +10,14 @@ RSpec.describe Client, type: :model do
   end
 
   describe '#valid?' do
-    it 'retorna falso quando o nome está vazio' do
+    it 'Nome é obrigatório' do
       client = Client.new(name: '', personal_code: '94641091064', email: 'julia@email.com', password: '12345678')
 
       client.valid?
       expect(client.errors.include? :name).to be true
     end
 
-    it 'retorna falso quando o CPF está vazio' do
+    it 'CPF é obrigatório' do
       client = Client.new(name: 'Julia', personal_code: '', email: 'julia@email.com', password: '12345678')
 
       client.valid?

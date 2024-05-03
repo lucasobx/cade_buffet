@@ -18,6 +18,19 @@ describe 'Dono de Buffet cria uma conta' do
     expect(owner.name).to eq 'Jorge'
   end
 
+  it 'e deve preencher todos os campos' do
+    visit root_path
+    click_on 'Dono de Buffet'
+    click_on 'Criar uma conta'
+    fill_in 'Nome', with: ''
+    fill_in 'E-mail', with: 'jorge@email.com'
+    fill_in 'Senha', with: '12345678'
+    fill_in 'Confirme sua senha', with: '12345678'
+    click_on 'Criar Conta'
+
+    expect(page).to have_content 'Nome não pode ficar em branco'
+  end
+
   it 'e é redirecionado para o cadastro de buffet' do
     visit root_path
     click_on 'Dono de Buffet'
