@@ -65,7 +65,7 @@ describe 'Cliente vê seus próprios pedidos' do
     expect(page).to have_content "Data: #{I18n.localize(1.day.from_now.to_date)}"
     expect(page).to have_content 'Endereço: Rua da Praça, 273'
     expect(page).to have_content 'Informações Adicionais: Festa de aniversário'
-    expect(page).to have_content 'Status: Pendente'
+    expect(page).to have_content 'Status: Aguardando Avaliação'
   end
 
   it 'e não visita pedidos de outros clientes' do

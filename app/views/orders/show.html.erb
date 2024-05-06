@@ -1,19 +1,26 @@
-<h1>Detalhes do Pedido</h1>
-<dl>
-  <dd><strong>Evento:</strong></dd>
-  <dt><%= @order.event_type.name %></dt>
-  <dd><strong>Data:</strong></dd>
-  <dt><%= I18n.localize(@order.event_date.to_date) %></dt>
-  <dd><strong>Endereço:</strong></dd>
-  <dt>
+<h1 class="mb-4">Detalhes do Pedido</h1>
+
+<% if @same_day_orders.any? %>
+  <div class="alert alert-warning" role="alert">
+    Atenção: Existem outros <%= pluralize(@same_day_orders.count, "pedidos") %> para o mesmo dia!
+  </div>
+<% end %>
+
+<dl class="row">
+  <dd class="col-sm-3"><strong>Evento:</strong></dd>
+  <dt class="col-sm-9"><%= @order.event_type.name %></dt>
+  <dd class="col-sm-3"><strong>Data:</strong></dd>
+  <dt class="col-sm-9"><%= I18n.localize(@order.event_date.to_date) %></dt>
+  <dd class="col-sm-3"><strong>Endereço:</strong></dd>
+  <dt class="col-sm-9">
     <% if @order.event_type.location_option %>
       <%= @order.event_address %>
     <% else %>
       <%= @order.event_type.buffet.full_address %>
     <% end %>
   </dt>
-  <dd><strong>Informações Adicionais:</strong></dd>
-  <dt><%= @order.event_details %></dt>
-  <dd><strong>Status:</strong></dd>
-  <dt><%= I18n.translate(@order.status) %></dt>
+  <dd class="col-sm-3"><strong>Informações Adicionais:</strong></dd>
+  <dt class="col-sm-9"><%= @order.event_details %></dt>
+  <dd class="col-sm-3"><strong>Status:</strong></dd>
+  <dt class="col-sm-9"><%= I18n.translate(@order.status) %></dt>
 </dl>

@@ -12,4 +12,8 @@ Rails.application.routes.draw do
   scope :client do
     get :my_orders, to: 'orders#index', as: 'client_orders'
   end
+
+  scope :owner do
+    get :my_buffet_orders, to: 'orders#my_buffet_orders', as: 'buffet_orders'
+  end
 end

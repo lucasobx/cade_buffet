@@ -34,12 +34,12 @@ describe 'Cliente faz pedido para um buffet' do
                             address: 'Av Martins, 50', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
                             postal_code: '14770-070', description: 'Buffet especializado em festas temáticas',
                             owner: owner, payment_methods: [cash, pix])
-    event_type = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
-                                   min_guests: 10, max_guests: 80, duration: 240,
-                                   menu_details: 'Doces, Salgados, Bebidas',
-                                   alcohol_option: false, decoration_option: true, parking_service_option: true,
-                                   location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
-                                   extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
+    EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
+                      min_guests: 10, max_guests: 80, duration: 240,
+                      menu_details: 'Doces, Salgados, Bebidas',
+                      alcohol_option: false, decoration_option: true, parking_service_option: true,
+                      location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
+                      extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
 
     login_as(client, scope: :client)
     visit root_path
@@ -124,12 +124,12 @@ describe 'Cliente faz pedido para um buffet' do
                             address: 'Av Martins, 50', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
                             postal_code: '14770-070', description: 'Buffet especializado em festas temáticas',
                             owner: owner, payment_methods: [cash, pix])
-    event_type = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
-                                   min_guests: 10, max_guests: 80, duration: 240,
-                                   menu_details: 'Doces, Salgados, Bebidas',
-                                   alcohol_option: false, decoration_option: true, parking_service_option: true,
-                                   location_option: false, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
-                                   extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
+    EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
+                      min_guests: 10, max_guests: 80, duration: 240,
+                      menu_details: 'Doces, Salgados, Bebidas',
+                      alcohol_option: false, decoration_option: true, parking_service_option: true,
+                      location_option: false, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
+                      extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
 
     login_as(client, scope: :client)
     visit root_path

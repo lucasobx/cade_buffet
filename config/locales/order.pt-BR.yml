@@ -1,5 +1,5 @@
 pt-BR:
-  pending: "Pendente"
+  pending: "Aguardando Avaliação"
   confirmed: "Confirmado"
   canceled: "Cancelado"
   activerecord:
