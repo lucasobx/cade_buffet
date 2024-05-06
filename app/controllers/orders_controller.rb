@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_client!, only: [:new, :create, :index]
   before_action :authenticate_owner!, only: [:my_buffet_orders]
   before_action :set_order_and_check_client, only: [:show], if: -> { client_signed_in? }
-  before_action :set_order_and_check_owner, only: [:show], if: -> { owner_signed_in? }
+  before_action :set_order_and_check_owner, only: [:show, :canceled], if: -> { owner_signed_in? }
 
   def index
     @orders = current_client.orders
@@ -37,10 +37,29 @@ class OrdersController < ApplicationController
     @orders = @buffet.orders.order(created_at: :desc)
   end
 
+  def canceled
+    @order.canceled!
+    redirect_to @order, notice: 'Pedido Cancelado!'
+  end
+
+  def approve
+    @order = Order.find(params[:id])
+  end
+
+  def confirmed
+    @order = Order.find(params[:id])
+    if @order.update(order_params)
+      redirect_to @order, notice: 'Pedido confirmado!'
+    else
+      render :approve
+    end
+  end
+
   private
   
   def order_params
-    params.require(:order).permit(:event_date, :estimated_guests, :event_details, :event_address)
+    params.require(:order).permit(:event_date, :estimated_guests, :event_details, :event_address,
+                                  :extra_fee, :discount, :adjustment_description, :payment_method_id)
   end
 
   def set_order_and_check_client

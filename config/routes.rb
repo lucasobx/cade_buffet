@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     resources :event_types, only: [:new, :create]
   end
   resources :event_types, only: [:show, :edit, :update]
-  resources :orders, only: [:show, :new, :create]
+  resources :orders, only: [:show, :new, :create] do
+    get 'approve', on: :member
+    post 'confirmed', on: :member
+    post 'canceled', on: :member
+  end
 
   scope :client do
     get :my_orders, to: 'orders#index', as: 'client_orders'

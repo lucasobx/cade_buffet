@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :client
   belongs_to :buffet
   belongs_to :event_type
+  belongs_to :payment_method, optional: true
 
   enum status: { pending: 0, confirmed: 5, canceled: 9}
 

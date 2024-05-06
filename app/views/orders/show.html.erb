@@ -24,3 +24,8 @@
   <dd class="col-sm-3"><strong>Status:</strong></dd>
   <dt class="col-sm-9"><%= I18n.translate(@order.status) %></dt>
 </dl>
+
+<% if @order.pending? %>
+  <%= link_to 'APROVAR', approve_order_path(@order.id) %>
+  <%= button_to 'CANCELAR', canceled_order_path(@order.id) %>
+<% end %>
