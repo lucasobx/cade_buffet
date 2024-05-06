@@ -1,0 +1,19 @@
+<h1>Detalhes do Pedido</h1>
+<dl>
+  <dd><strong>Evento:</strong></dd>
+  <dt><%= @order.event_type.name %></dt>
+  <dd><strong>Data:</strong></dd>
+  <dt><%= I18n.localize(@order.event_date.to_date) %></dt>
+  <dd><strong>Endereço:</strong></dd>
+  <dt>
+    <% if @order.event_type.location_option %>
+      <%= @order.event_address %>
+    <% else %>
+      <%= @order.event_type.buffet.full_address %>
+    <% end %>
+  </dt>
+  <dd><strong>Informações Adicionais:</strong></dd>
+  <dt><%= @order.event_details %></dt>
+  <dd><strong>Status:</strong></dd>
+  <dt><%= I18n.translate(@order.status) %></dt>
+</dl>

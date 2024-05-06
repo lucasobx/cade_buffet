@@ -1,0 +1,18 @@
+pt-BR:
+  pending: "Pendente"
+  confirmed: "Confirmado"
+  canceled: "Cancelado"
+  activerecord:
+    models:
+      order: "Pedido"
+    attributes:
+      order:
+        client_id: "Cliente"
+        buffet_id: "Buffet"
+        event_type_id: "Evento"
+        event_date: "Data"
+        estimated_guests: "Número de Convidados"
+        event_details: "Informações Adicionais"
+        code: "Código"
+        event_address: "Endereço"
+        status: "Status" 

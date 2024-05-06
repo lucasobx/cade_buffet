@@ -40,7 +40,7 @@ describe 'Dono de Buffet cria uma conta' do
     fill_in 'Senha', with: '12345678'
     fill_in 'Confirme sua senha', with: '12345678'
     click_on 'Criar Conta'
-    click_on 'Cade Buffet?'
+    click_on 'CadeBuffet'
 
     expect(current_path).to eq new_buffet_path
     expect(page).to have_content 'Cadastre seu buffet antes de prosseguir.'

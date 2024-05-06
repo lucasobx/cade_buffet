@@ -4,8 +4,8 @@ describe 'Visitante acessa a tela inicial' do
   it 'e vê o nome da aplicação' do
     visit root_path
 
-    expect(page).to have_content 'Cade Buffet?'
-    expect(page).to have_link 'Cade Buffet?', href: root_path
+    expect(page).to have_content 'CadeBuffet'
+    expect(page).to have_link 'CadeBuffet', href: root_path
   end
 
   it 'e vê os buffets cadastrados' do

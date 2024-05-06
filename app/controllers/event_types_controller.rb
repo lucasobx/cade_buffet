@@ -3,10 +3,6 @@ class EventTypesController < ApplicationController
   before_action :authenticate_owner!, only: [:new, :create, :edit, :update]
   before_action :check_owner, only: [:edit, :update]
 
-  def index
-    @event_types = EventType.all
-  end
-
   def new
     @buffet = Buffet.find(params[:buffet_id])
     @event_type = EventType.new
@@ -47,9 +43,8 @@ class EventTypesController < ApplicationController
   end
 
   def event_type_params
-    params.require(:event_type).permit(
-      :name, :description, :min_guests,:max_guests, :duration, :menu_details, :alcohol_option, :decoration_option,
-      :parking_service_option, :location_option, :base_price, :extra_guest, :extra_hour, :we_base_price,
-      :we_extra_guest, :we_extra_hour)
+    params.require(:event_type).permit(:name, :description, :min_guests,:max_guests, :duration, :menu_details,
+                                       :alcohol_option, :decoration_option, :parking_service_option, :location_option,
+                                       :base_price, :extra_guest, :extra_hour, :we_base_price, :we_extra_guest, :we_extra_hour)
   end
 end

@@ -1,12 +1,13 @@
 <section>
   <h2>Buffets</h2>
-
-  <% @buffets.each do |b| %>
-    <div>
-      <h3><%= link_to b.brand_name, b %></h3>
-      <%= b.city %>, <%= b.state %>
-    </div>
-  <% end %>
+  <div class="container pt-5">
+    <% @buffets.each do |b| %>
+      <div>
+        <h3><%= link_to b.brand_name, b %></h3>
+        <%= b.city %>, <%= b.state %>
+      </div>
+    <% end %>
+  </div>
 
   <% if @buffets.empty? %>
     <p>Não existem buffets cadastrados.</p>

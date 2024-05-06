@@ -1,35 +1,45 @@
-<% @event_types.each do |e| %>
-  <div>
-    <h3><%= e.name %></h3>
-    <dl>
-      <dt>Descrição:</dt>
-      <dd><%= e.description %></dd>
-      <dt>Capacidade:</dt>
-      <dd><%= e.min_guests %> a <%= e.max_guests %> convidados</dd>
-      <dt>Duração:</dt>
-      <dd><%= e.duration %> minutos</dd>
-      <dt>Cardápio:</dt>
-      <dd><%= e.menu_details %></dd>
-      <dt>Bebidas Alcoólicas:</dt>
-      <dd><%= e.alcohol_option ? "Sim" : "Não" %></dd>
-      <dt>Decoração:</dt>
-      <dd><%= e.decoration_option ? "Sim" : "Não" %></dd>
-      <dt>Estacionamento:</dt>
-      <dd><%= e.parking_service_option ? "Sim" : "Não" %></dd>
-      <dt>Escolha da Localização:</dt>
-      <dd><%= e.location_option ? "Sim" : "Não" %></dd>
-    </dl>
-  </div>
-  <div>
-    <p>Preço Base para <%= e.min_guests %> Convidados: R$<%= e.base_price %> - Fim de Semana: R$<%= e.we_base_price %></p>
-    <p>Taxa por Pessoa Excedente: R$<%= e.extra_guest %> - Fim de Semana: R$<%= e.we_extra_guest %></p>
-    <p>Taxa por Hora Extra: R$<%= e.extra_hour %> - Fim de Semana: R$<%= e.we_extra_hour %></p>
-  </div>
-  <div>
-    <% if owner_signed_in? && current_owner == @buffet.owner %>
-      <%= link_to edit_event_type_path(e) do %>
-        <p>Editar <%= e.name %></p>
+<% @event_types.each do |event| %>
+  <div class="card mb-3 bg-secondary text-light">
+    <div class="card-header">
+      <h4 class="mb-0"><%= event.name %></h4>
+    </div>
+    <div class="card-body">
+      <dl>
+        <dt>Descrição:</dt>
+        <dd><%= event.description %></dd>
+        <dt>Capacidade:</dt>
+        <dd><%= event.min_guests %> a <%= event.max_guests %> convidados</dd>
+        <dt>Duração:</dt>
+        <dd><%= event.duration %> minutos</dd>
+        <dt>Cardápio:</dt>
+        <dd><%= event.menu_details %></dd>
+        <dt>Bebidas Alcoólicas:</dt>
+        <dd><%= event.alcohol_option ? "Sim" : "Não" %></dd>
+        <dt>Decoração:</dt>
+        <dd><%= event.decoration_option ? "Sim" : "Não" %></dd>
+        <dt>Estacionamento:</dt>
+        <dd><%= event.parking_service_option ? "Sim" : "Não" %></dd>
+        <dt>Escolha da Localização:</dt>
+        <dd><%= event.location_option ? "Sim" : "Não" %></dd>
+      </dl>
+
+      <p>Preço Base para <%= event.min_guests %> Convidados: R$<%= event.base_price %> - Fim de Semana: R$<%= event.we_base_price %></p>
+      <p>Taxa por Pessoa Excedente: R$<%= event.extra_guest %> - Fim de Semana: R$<%= event.we_extra_guest %></p>
+      <p>Taxa por Hora Extra: R$<%= event.extra_hour %> - Fim de Semana: R$<%= event.we_extra_hour %></p>
+    </div>
+
+    <div>
+      <% if owner_signed_in? && current_owner == @buffet.owner %>
+        <%= link_to edit_event_type_path(event) do %>
+          <p>Editar <%= event.name %></p>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+
+    <div>
+      <%= link_to new_order_path(event_type_id: event.id) do %>
+        <p>Agendar <%= event.name %>
+      <% end %>
+    </div>
+ </div>
 <% end %>

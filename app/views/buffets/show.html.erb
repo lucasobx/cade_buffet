@@ -1,22 +1,29 @@
-<h1><%= @buffet.brand_name %></h1>
-<strong>Descrição:</strong> <%= @buffet.description %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1><%= @buffet.brand_name %></h1>
+      <strong>Descrição:</strong> <%= @buffet.description %>
 
-<dl>
-  <dt>Contato:</dt>
-  <dd><%= @buffet.phone_number %> - <%= @buffet.email %></dd>
-  <dt>Contato:</dt>
-  <dd><%= @buffet.phone_number %> - <%= @buffet.email %></dd>
-  <dt>Endereço:</dt>
-  <dd><%= @buffet.address %> - <%= @buffet.neighborhood %>, <%= @buffet.city %> - 
-  <%= @buffet.state %> - <%= @buffet.postal_code %></dd>
-  <dt>Métodos de pagamento aceitos:</dt>
-  <dd><%= @buffet.payment_methods.map(&:name).join(", ") %></dd>
-</dl>
+      <dl>
+        <dt>Contato:</dt>
+        <dd><%= @buffet.phone_number %> - <%= @buffet.email %></dd>
+        <dt>Contato:</dt>
+        <dd><%= @buffet.phone_number %> - <%= @buffet.email %></dd>
+        <dt>Endereço:</dt>
+        <dd><%= @buffet.address %> - <%= @buffet.neighborhood %>, <%= @buffet.city %> - 
+        <%= @buffet.state %> - <%= @buffet.postal_code %></dd>
+        <dt>Métodos de pagamento aceitos:</dt>
+        <dd><%= @buffet.payment_methods.map(&:name).join(", ") %></dd>
+      </dl>
 
-<% if owner_signed_in? && current_owner == @buffet.owner %>
-  <%= link_to 'Editar', edit_buffet_path %>
-  <%= link_to 'Cadastrar Tipo de Evento', new_buffet_event_type_path(@buffet) %>
-<% end %>
-
-<h2>Eventos Fornecidos</h2>
-<%= render partial: 'event_types', locals: { event_types: @event_types } %>
+      <% if owner_signed_in? && current_owner == @buffet.owner %>
+        <%= link_to 'Editar', edit_buffet_path %>
+        <%= link_to 'Cadastrar Tipo de Evento', new_buffet_event_type_path(@buffet) %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <h2>Eventos Fornecidos</h2>
+      <%= render partial: 'event_types', locals: { event_types: @event_types } %>
+    </div>
+  </div>
+</div>

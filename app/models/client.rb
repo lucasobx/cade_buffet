@@ -4,6 +4,8 @@ class Client < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :orders
+
   validates :name, :personal_code, presence: true
   validates :personal_code, length: { is: 11 }
   validates :personal_code, uniqueness: true

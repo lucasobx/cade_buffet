@@ -1,0 +1,6 @@
+<dl>
+  <dt><%= Order.human_attribute_name(:code) %>:</dt>
+  <dd><%= link_to order.code, order_path(order) %></dd>
+  <dt><%= Order.human_attribute_name(:event_date) %>:</dt>
+  <dd><%= I18n.localize(order.event_date) %>
+</dl>
