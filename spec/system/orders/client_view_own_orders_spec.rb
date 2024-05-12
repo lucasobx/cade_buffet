@@ -98,4 +98,14 @@ describe 'Cliente vê seus próprios pedidos' do
     expect(current_path).to eq root_path
     expect(page).to have_content 'Você não possui acesso a este pedido.'
   end
+
+  it 'e não há pedidos' do
+    joao = Client.create!(name: 'Joao', personal_code: '94641091064', email: 'joao@email.com', password: '12345678')
+
+    login_as joao, scope: :client
+    visit root_path
+    click_on 'Meus Pedidos'
+
+    expect(page).to have_content 'Você não possui nenhum pedido.'
+  end
 end

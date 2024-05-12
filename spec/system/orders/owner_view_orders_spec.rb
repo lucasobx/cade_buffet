@@ -135,8 +135,8 @@ describe 'Dono de Buffet vê lista de pedidos' do
     click_on order1.code
 
     expect(page).to have_content 'Atenção: Existem outros 2 pedidos para o mesmo dia!'
-    expect(page).to have_content "Pedido: #{order2.code}"
-    expect(page).to have_content "Pedido: #{order3.code}"
+    expect(page).to have_link order2.code
+    expect(page).to have_link order3.code
   end
 
   it 'e notificação aparece apenas para o dono do buffet' do
@@ -170,5 +170,28 @@ describe 'Dono de Buffet vê lista de pedidos' do
     click_on order1.code
 
     expect(page).not_to have_content 'Atenção: Existem outros 1 pedidos para o mesmo dia!'
+  end
+
+  it 'e não há pedidos para o buffet' do
+    owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+    cash = PaymentMethod.create!(name: 'Dinheiro')
+    pix = PaymentMethod.create!(name: 'Pix')
+    buffet = Buffet.create!(brand_name: 'Miniland', corporate_name: 'Miniland LTDA',
+                            registration_code: '00556164220103', phone_number: '(11)32441110', email: 'miniland@email.com',
+                            address: 'Av Martins, 50', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14770-070', description: 'Buffet especializado em festas temáticas',
+                            owner: owner, payment_methods: [cash, pix])
+    EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
+                      min_guests: 10, max_guests: 80, duration: 240,
+                      menu_details: 'Doces, Salgados, Bebidas',
+                      alcohol_option: false, decoration_option: true, parking_service_option: true,
+                      location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
+                      extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
+    
+    login_as owner, scope: :owner
+    visit root_path
+    click_on 'Pedidos'
+
+    expect(page).to have_content 'Não há pedidos registrados.'
   end
 end
