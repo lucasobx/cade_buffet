@@ -6,7 +6,7 @@ describe 'Dono de Buffet cadastra um buffet' do
     PaymentMethod.create!(name: 'Cartão de Crédito')
     PaymentMethod.create!(name: 'Pix')
 
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit root_path
     fill_in 'Nome Fantasia', with: 'Casamentos Buffet'
     fill_in 'Razão Social', with: 'Casamentos Buffet LTDA'
@@ -32,7 +32,7 @@ describe 'Dono de Buffet cadastra um buffet' do
     PaymentMethod.create!(name: 'Cartão de Crédito')
     PaymentMethod.create!(name: 'Pix')
 
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit root_path
     fill_in 'Nome Fantasia', with: ''
     fill_in 'Razão Social', with: ''
@@ -53,7 +53,7 @@ describe 'Dono de Buffet cadastra um buffet' do
                    postal_code: '14980-970', description: 'Buffet especializado em casamentos',
                    owner: owner, payment_methods: [credit, cash])
     
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit new_buffet_path
 
     expect(current_path).to eq root_path

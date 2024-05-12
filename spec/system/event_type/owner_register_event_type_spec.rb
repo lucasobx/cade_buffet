@@ -26,7 +26,7 @@ describe 'Dono de Buffet cadastra tipo de evento' do
                             postal_code: '14980-970', description: 'Buffet especializado em casamentos',
                             owner: owner, payment_methods: [cash, pix])
 
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit root_path
     within 'nav' do
       click_on 'Meu Buffet'
@@ -63,7 +63,7 @@ describe 'Dono de Buffet cadastra tipo de evento' do
                    postal_code: '14980-970', description: 'Buffet especializado em casamentos',
                    owner: owner, payment_methods: [cash, pix])
 
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit root_path
     within 'nav' do
       click_on 'Meu Buffet'
@@ -111,7 +111,7 @@ describe 'Dono de Buffet cadastra tipo de evento' do
                    postal_code: '14980-970', description: 'Buffet especializado em casamentos',
                    owner: owner, payment_methods: [cash, pix])
 
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit root_path
     within 'nav' do
       click_on 'Meu Buffet'

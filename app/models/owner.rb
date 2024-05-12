@@ -5,6 +5,7 @@ class Owner < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :buffet
+  has_many :orders
 
   validates :name, presence: true
 

@@ -37,8 +37,10 @@
     </div>
 
     <div>
-      <%= link_to new_order_path(event_type_id: event.id) do %>
-        <p>Agendar <%= event.name %>
+      <% unless owner_signed_in? %>
+        <%= link_to new_order_path(event_type_id: event.id) do %>
+          <p>Agendar <%= event.name %>
+        <% end %>
       <% end %>
     </div>
  </div>

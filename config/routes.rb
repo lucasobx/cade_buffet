@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   end
   resources :event_types, only: [:show, :edit, :update]
   resources :orders, only: [:show, :new, :create] do
-    get 'approve', on: :member
     post 'confirmed', on: :member
     post 'canceled', on: :member
   end

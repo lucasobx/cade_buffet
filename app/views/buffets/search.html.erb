@@ -1,8 +1,10 @@
 <h1>Resultados da Busca por: <%= @name %></h1>
 
 <p><%= @buffets.count %> <%= Buffet.model_name.human(count: @buffets.count).downcase %> <%= t(:found, count: @buffets.count) %></p>
-<% @buffets.each do |buffet| %>
-  <ul>
-    <li><%= link_to "#{buffet.brand_name} | #{buffet.city}, #{buffet.state}", buffet_path(buffet) %></li>
-  </ul>
-<% end %>
+<div id="buffets">
+  <% @buffets.each do |buffet| %>
+    <div>
+      <%= link_to "#{buffet.brand_name} - #{buffet.city}, #{buffet.state}", buffet_path(buffet) %>
+    </div>
+  <% end %>
+</div>

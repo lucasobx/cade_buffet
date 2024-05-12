@@ -12,14 +12,14 @@ RSpec.describe Order, type: :model do
                               address: 'Av Martins, 50', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
                               postal_code: '14770-070', description: 'Buffet especializado em festas temáticas',
                               owner: owner, payment_methods: [cash, pix])
-      event_type = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
-                                     min_guests: 10, max_guests: 80, duration: 240,
-                                     menu_details: 'Doces, Salgados, Bebidas',
-                                     alcohol_option: false, decoration_option: true, parking_service_option: true,
-                                     location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
-                                     extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
-      order = Order.new(client: client, buffet: buffet, event_type: event_type, event_date: '10/10/2050',
-                        estimated_guests: 30, event_details: 'Festa de aniversário', event_address: 'Rua das Flores')  
+      event = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
+                                min_guests: 10, max_guests: 80, duration: 240,
+                                menu_details: 'Doces, Salgados, Bebidas',
+                                alcohol_option: false, decoration_option: true, parking_service_option: true,
+                                location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
+                                extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
+      order = Order.new(client: client, buffet: buffet, event_type: event, event_date: '10/10/2050',
+                        estimated_guests: 30, event_details: 'Festa de aniversário', event_address: 'Rua das Flores') 
 
       expect(order.valid?).to be true
     end
@@ -78,13 +78,13 @@ RSpec.describe Order, type: :model do
                               address: 'Av Martins, 50', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
                               postal_code: '14770-070', description: 'Buffet especializado em festas temáticas',
                               owner: owner, payment_methods: [cash, pix])
-      event_type = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
-                                     min_guests: 10, max_guests: 80, duration: 240,
-                                     menu_details: 'Doces, Salgados, Bebidas',
-                                     alcohol_option: false, decoration_option: true, parking_service_option: true,
-                                     location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
-                                     extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
-      order = Order.new(client: client, buffet: buffet, event_type: event_type, event_date: '10/10/2050',
+      event = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
+                                min_guests: 10, max_guests: 80, duration: 240,
+                                menu_details: 'Doces, Salgados, Bebidas',
+                                alcohol_option: false, decoration_option: true, parking_service_option: true,
+                                location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
+                                extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
+      order = Order.new(client: client, buffet: buffet, event_type: event, event_date: '10/10/2050',
                         estimated_guests: 30, event_details: 'Festa de aniversário', event_address: 'Rua das Flores')
 
       order.save!
@@ -103,20 +103,20 @@ RSpec.describe Order, type: :model do
                               address: 'Av Martins, 50', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
                               postal_code: '14770-070', description: 'Buffet especializado em festas temáticas',
                               owner: owner, payment_methods: [cash, pix])
-      event_type = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
-                                     min_guests: 10, max_guests: 80, duration: 240,
-                                     menu_details: 'Doces, Salgados, Bebidas',
-                                     alcohol_option: false, decoration_option: true, parking_service_option: true,
-                                     location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
-                                     extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
-      f_order = Order.create!(client: client, buffet: buffet, event_type: event_type, event_date: '10/10/2050',
+      event = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
+                                min_guests: 10, max_guests: 80, duration: 240,
+                                menu_details: 'Doces, Salgados, Bebidas',
+                                alcohol_option: false, decoration_option: true, parking_service_option: true,
+                                location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
+                                extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
+      order1 = Order.create!(client: client, buffet: buffet, event_type: event, event_date: '10/10/2050',
                               estimated_guests: 30, event_details: 'Festa de aniversário', event_address: 'Rua das Flores')
-      s_order = Order.new(client: client, buffet: buffet, event_type: event_type, event_date: '10/10/2030',
+      order2 = Order.new(client: client, buffet: buffet, event_type: event, event_date: '10/10/2030',
                           estimated_guests: 30, event_details: 'Festa de aniversário', event_address: 'Rua das Flores')                             
 
-      s_order.save!
+      order2.save!
 
-      expect(s_order.code).not_to eq f_order.code
+      expect(order2.code).not_to eq order1.code
     end
 
     it 'e não deve ser modificado' do
@@ -129,13 +129,13 @@ RSpec.describe Order, type: :model do
                               address: 'Av Martins, 50', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
                               postal_code: '14770-070', description: 'Buffet especializado em festas temáticas',
                               owner: owner, payment_methods: [cash, pix])
-      event_type = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
-                                     min_guests: 10, max_guests: 80, duration: 240,
-                                     menu_details: 'Doces, Salgados, Bebidas',
-                                     alcohol_option: false, decoration_option: true, parking_service_option: true,
-                                     location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
-                                     extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
-      order = Order.create!(client: client, buffet: buffet, event_type: event_type, event_date: 1.week.from_now,
+      event = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
+                                min_guests: 10, max_guests: 80, duration: 240,
+                                menu_details: 'Doces, Salgados, Bebidas',
+                                alcohol_option: false, decoration_option: true, parking_service_option: true,
+                                location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
+                                extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
+      order = Order.create!(client: client, buffet: buffet, event_type: event, event_date: 1.week.from_now,
                             estimated_guests: 30, event_details: 'Festa de aniversário', event_address: 'Rua das Flores')
       original_code = order.code
 

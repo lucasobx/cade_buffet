@@ -42,24 +42,10 @@ class OrdersController < ApplicationController
     redirect_to @order, notice: 'Pedido Cancelado!'
   end
 
-  def approve
-    @order = Order.find(params[:id])
-  end
-
-  def confirmed
-    @order = Order.find(params[:id])
-    if @order.update(order_params)
-      redirect_to @order, notice: 'Pedido confirmado!'
-    else
-      render :approve
-    end
-  end
-
   private
   
   def order_params
-    params.require(:order).permit(:event_date, :estimated_guests, :event_details, :event_address,
-                                  :extra_fee, :discount, :adjustment_description, :payment_method_id)
+    params.require(:order).permit(:event_date, :estimated_guests, :event_details, :event_address)
   end
 
   def set_order_and_check_client

@@ -1,12 +1,19 @@
 <h1 class="mb-4">Detalhes do Pedido</h1>
 
-<% if @same_day_orders.any? %>
-  <div class="alert alert-warning" role="alert">
-    Atenção: Existem outros <%= pluralize(@same_day_orders.count, "pedidos") %> para o mesmo dia!
-  </div>
+<% if owner_signed_in? %>
+  <% if @same_day_orders.any? %>
+    <div class="alert alert-warning" role="alert">
+      Atenção: Existem outros <%= pluralize(@same_day_orders.count, "pedidos") %> para o mesmo dia!
+      <% @same_day_orders.each do |order| %>
+        <p>Pedido: <%= link_to order.code, order %></p>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 
 <dl class="row">
+  <dd class="col-sm-3"><strong>Cliente:</strong></dd>
+  <dt class="col-sm-9"><%= @order.client.name %></dt>
   <dd class="col-sm-3"><strong>Evento:</strong></dd>
   <dt class="col-sm-9"><%= @order.event_type.name %></dt>
   <dd class="col-sm-3"><strong>Data:</strong></dd>
@@ -24,8 +31,3 @@
   <dd class="col-sm-3"><strong>Status:</strong></dd>
   <dt class="col-sm-9"><%= I18n.translate(@order.status) %></dt>
 </dl>
-
-<% if @order.pending? %>
-  <%= link_to 'APROVAR', approve_order_path(@order.id) %>
-  <%= button_to 'CANCELAR', canceled_order_path(@order.id) %>
-<% end %>

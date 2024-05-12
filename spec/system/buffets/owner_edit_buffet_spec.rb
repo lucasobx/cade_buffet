@@ -26,7 +26,7 @@ describe 'Dono de Buffet edita um buffet' do
                    postal_code: '14980-970', description: 'Buffet especializado em casamentos',
                    owner: owner, payment_methods: [credit, cash])
     
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Editar'
@@ -57,7 +57,7 @@ describe 'Dono de Buffet edita um buffet' do
                    postal_code: '14980-970', description: 'Buffet especializado em casamentos',
                    owner: owner, payment_methods: [credit, cash])
     
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Editar'
@@ -83,7 +83,7 @@ describe 'Dono de Buffet edita um buffet' do
                    postal_code: '14980-970', description: 'Buffet especializado em casamentos',
                    owner: owner, payment_methods: [credit, cash])
     
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Editar'
@@ -112,7 +112,7 @@ describe 'Dono de Buffet edita um buffet' do
                    postal_code: '55280-001', description: 'Buffet especializado em festa infantil',
                    owner: second_owner, payment_methods: [credit, cash])
 
-      login_as(second_owner, scope: :owner)
+      login_as second_owner, scope: :owner
       visit edit_buffet_path(buffet)
       
       expect(current_path).not_to eq edit_buffet_path(buffet)

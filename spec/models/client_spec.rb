@@ -38,10 +38,10 @@ RSpec.describe Client, type: :model do
     end
 
     it 'CPF deve ser único' do
-      Client.create!(name: 'Julia', personal_code: '94641091060', email: 'julia@email.com', password: '12345678')
-      s_client = Client.new(name: 'Pedro', personal_code: '94641091060', email: 'pedro@email.com', password: '12345678')
+      client1 = Client.create!(name: 'Julia', personal_code: '94641091060', email: 'julia@email.com', password: '12345678')
+      client2 = Client.new(name: 'Pedro', personal_code: '94641091060', email: 'pedro@email.com', password: '12345678')
 
-      expect(s_client.valid?).to be false
+      expect(client2.valid?).to be false
     end
   end
 end

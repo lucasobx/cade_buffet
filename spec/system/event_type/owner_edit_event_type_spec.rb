@@ -10,14 +10,14 @@ describe 'Dono de Buffet edita tipo de evento' do
                             address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
                             postal_code: '14980-970', description: 'Buffet especializado em casamentos',
                             owner: owner, payment_methods: [cash, pix])
-    event_type = EventType.create!(name: 'Festa de Casamento', description: 'Espaço luxuoso e confortável',
+    event = EventType.create!(name: 'Festa de Casamento', description: 'Espaço luxuoso e confortável',
                                    min_guests: 15, max_guests: 150, duration: 240,
                                    menu_details: 'Doces, Salgados, Bebidas',
                                    alcohol_option: true, decoration_option: true, parking_service_option: true,
                                    location_option: false, buffet: buffet, base_price: 10000.0, extra_guest: 250.0,
                                    extra_hour: 1000.0, we_base_price: 15000.0, we_extra_guest: 400.0, we_extra_hour: 1500.0)
     
-    visit edit_event_type_path(event_type.id)
+    visit edit_event_type_path(event.id)
 
     expect(current_path).to eq new_owner_session_path
   end
@@ -38,7 +38,7 @@ describe 'Dono de Buffet edita tipo de evento' do
                       location_option: false, buffet: buffet, base_price: 10000.0, extra_guest: 250.0,
                       extra_hour: 1000.0, we_base_price: 15000.0, we_extra_guest: 400.0, we_extra_hour: 1500.0)
 
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit root_path
     within 'nav' do
       click_on 'Meu Buffet'
@@ -73,7 +73,7 @@ describe 'Dono de Buffet edita tipo de evento' do
                       location_option: false, buffet: buffet, base_price: 10000.0, extra_guest: 250.0,
                       extra_hour: 1000.0, we_base_price: 15000.0, we_extra_guest: 400.0, we_extra_hour: 1500.0)
 
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit root_path
     within 'nav' do
       click_on 'Meu Buffet'
@@ -105,7 +105,7 @@ describe 'Dono de Buffet edita tipo de evento' do
                       location_option: false, buffet: buffet, base_price: 10000.0, extra_guest: 250.0,
                       extra_hour: 1000.0, we_base_price: 15000.0, we_extra_guest: 400.0, we_extra_hour: 1500.0)
 
-    login_as(owner, scope: :owner)
+    login_as owner, scope: :owner
     visit root_path
     within 'nav' do
       click_on 'Meu Buffet'
