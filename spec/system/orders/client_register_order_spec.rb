@@ -95,7 +95,7 @@ describe 'Cliente faz pedido para um buffet' do
     click_on 'Agendar Festa dos Heróis'
     fill_in 'Data', with: ''
     fill_in 'Número de Convidados', with: ''
-    click_on 'Agendar Evento'
+    click_on 'Enviar'
     
     expect(page).to have_content 'Não foi possível concluir o agendamento.'
     expect(page).to have_content 'Data não pode ficar em branco'
@@ -127,7 +127,7 @@ describe 'Cliente faz pedido para um buffet' do
     fill_in 'Número de Convidados', with: 30
     fill_in 'Informações Adicionais', with: 'Comemoração do aniversário do meu filho'
     fill_in 'Endereço', with: 'Rua da Praça, 273'
-    click_on 'Agendar Evento'
+    click_on 'Enviar'
 
     expect(current_path).to eq order_path(Order.last)
     expect(page).to have_content 'Agendamento realizado com sucesso!'
@@ -162,7 +162,7 @@ describe 'Cliente faz pedido para um buffet' do
     fill_in 'Número de Convidados', with: 30
     fill_in 'Informações Adicionais', with: 'Comemoração do aniversário do meu filho'
     expect(page).not_to have_field 'Endereço'
-    click_on 'Agendar Evento'
+    click_on 'Enviar'
 
     expect(current_path).to eq order_path(Order.last)
     expect(page).to have_content 'Agendamento realizado com sucesso!'

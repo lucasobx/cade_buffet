@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_client!, only: [:new, :create, :index]
+  before_action :authenticate_client!, only: [:new, :create, :edit, :update, :index]
   before_action :authenticate_owner!, only: [:my_buffet_orders]
-  before_action :set_order_and_check_client, only: [:show], if: -> { client_signed_in? }
+  before_action :set_order_and_check_client, only: [:show, :edit, :update], if: -> { client_signed_in? }
   before_action :set_order_and_check_owner, only: [:show, :canceled], if: -> { owner_signed_in? }
 
   def index
@@ -30,6 +30,20 @@ class OrdersController < ApplicationController
       flash.now[:notice] = 'Não foi possível concluir o agendamento.'
       render 'new', status: 422
     end
+  end
+
+  def edit
+    @event_type = @order.event_type
+  end
+
+  def update
+   @event_type = @order.event_type
+   if @order.update(order_params)
+    redirect_to @order, notice: 'Pedido atualizado com sucesso!'
+   else
+    flash.now[:notice] = 'Não foi possível atualizar o pedido.'
+    render 'edit', status: 422
+   end
   end
 
   def my_buffet_orders

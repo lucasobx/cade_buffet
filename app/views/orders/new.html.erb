@@ -1,37 +1,3 @@
-<% if @order.errors.any? %>
-  <p>Verifique os erros abaixo:</p>
-  <ul>
-  <% @order.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-  </ul>
-<% end %>
+<h1>Novo Pedido</h1>
 
-<%= form_with model: @order do |f| %>
-  <%= hidden_field_tag :event_type_id, @event_type.id %>
-  
-  <div class="mb-3">
-    <%= f.label :event_date %>
-    <%= f.date_field :event_date %>
-  </div>
-  <div class="mb-3">
-    <%= f.label :estimated_guests %>
-    <%= f.number_field :estimated_guests %>
-  </div>
-  <div class="mb-3">
-    <%= f.label :event_details, class: 'form-label' %>
-    <%= f.text_area :event_details, class: 'form-control' %>
-  </div>
-
-  <% if @show_address %>
-    <%= f.label :event_address %>
-    <%= f.text_field :event_address %>
-  <% else %>
-    <div class="mb-3">
-      <%= f.label :event_address %>:
-      <span class="form-text"><%= @event_type.buffet.full_address %></p>
-    </div>
-  <% end %>
-
-  <%= f.submit 'Agendar Evento' %>
-<% end %>
+<%= render 'form' %>
