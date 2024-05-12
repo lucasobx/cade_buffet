@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Buffet, type: :model do
+  describe '#full_address' do
+    it 'exibe o endereço completo' do
+      buffet = Buffet.new(address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP')
+
+      expect(buffet.full_address).to eq 'Av Machado, 650 - Jardim do Sol, Sales - SP'
+    end
+  end
+
   describe '#valid?' do
     context 'presence' do
       it 'Nome Fantasia é obrigatório' do
