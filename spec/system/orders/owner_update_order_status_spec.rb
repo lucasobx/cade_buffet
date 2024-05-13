@@ -32,7 +32,7 @@ describe 'Dono de Buffet informa novo status de pedido' do
     within '#evaluate_order' do
       expect(page).to have_content 'Avaliar Pedido'
       expect(page).to have_content "Valor Final: R$#{order.final_price}"
-      expect(page).to have_field 'Data de Validade'
+      expect(page).to have_field 'Data-Limite'
       expect(page).to have_field 'Taxa Extra'
       expect(page).to have_field 'Desconto'
       expect(page).to have_field 'Detalhes do Ajuste'
@@ -65,7 +65,7 @@ describe 'Dono de Buffet informa novo status de pedido' do
     visit root_path
     click_on 'Pedidos'
     click_on order.code
-    fill_in 'Data de Validade', with: 2.weeks.from_now
+    fill_in 'Data-Limite', with: 2.weeks.from_now
     fill_in 'Taxa Extra', with: '200'
     fill_in 'Desconto', with: '20'
     fill_in 'Detalhes do Ajuste', with: 'R$200,00 para o deslocamento. Desconto de R$20,00 pelo primeiro pedido'
@@ -75,7 +75,7 @@ describe 'Dono de Buffet informa novo status de pedido' do
     expect(current_path).to eq order_path(order.id)
     expect(page).to have_content 'Pedido aprovado com sucesso!'
     expect(page).to have_content "Valor Final: R$12180.0"
-    expect(page).to have_content "Data de Validade: #{order.price_valid_until}"
+    expect(page).to have_content "Data-Limite: #{order.price_valid_until}"
     expect(page).to have_content 'Taxa Extra: R$200.0'
     expect(page).to have_content 'Desconto: R$20.0'
     expect(page).to have_content 'Detalhes do Ajuste: R$200,00 para o deslocamento. Desconto de R$20,00 pelo primeiro pedido'

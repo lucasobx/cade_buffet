@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :event_types, only: [:show, :edit, :update]
   resources :orders, only: [:show, :new, :create, :edit, :update] do
+    post 'confirmed', on: :member
     post 'canceled', on: :member
     patch 'approved', on: :member
   end

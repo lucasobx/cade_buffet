@@ -42,8 +42,6 @@
     <dt class="col-sm-9">R$<%= @order.final_price %></dt>
 
     <% if @order.approved? %>
-      <dd class="col-sm-3"><strong>Data de Validade:</strong></dd>
-      <dt class="col-sm-9"><%= I18n.localize(@order.price_valid_until.to_date) %></dt>
       <dd class="col-sm-3"><strong>Taxa Extra:</strong></dd>
       <dt class="col-sm-9">R$<%= @order.extra_fee %></dt>
       <dd class="col-sm-3"><strong>Desconto:</strong></dd>
@@ -51,7 +49,9 @@
       <dd class="col-sm-3"><strong>Detalhes do Ajuste:</strong></dd>
       <dt class="col-sm-9"><%= @order.adjustment_description %></dt>
       <dd class="col-sm-3"><strong>Método de Pagamento:</strong></dd>
-      <dt class="col-sm-9"><%= @order.payment_method.name %></dt>      
+      <dt class="col-sm-9"><%= @order.payment_method.name %></dt>
+      <dd class="col-sm-3"><strong>Data-Limite:</strong></dd>
+      <dt class="col-sm-9"><%= I18n.localize(@order.price_valid_until.to_date) %></dt>   
     <% end %>
   </dl>
 </section>
@@ -59,6 +59,14 @@
 <% if client_signed_in? && @order.pending? %>
   <%= link_to 'Editar Pedido', edit_order_path(@order.id) %>
 <% end %>
+
+<section id="confirm_order">
+  <% if client_signed_in? && @order.approved? %>
+    <% if Date.today <= @order.price_valid_until  %>
+      <%= button_to 'Confirmar Pedido', confirmed_order_path(@order.id) %>
+    <% end %>
+  <% end %>
+</section>
 
 <section id="evaluate_order">
   <% if owner_signed_in? && @order.pending? %>

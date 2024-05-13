@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_client!, only: [:new, :create, :edit, :update, :index]
   before_action :authenticate_owner!, only: [:my_buffet_orders]
-  before_action :set_order_and_check_client, only: [:show, :edit, :update], if: -> { client_signed_in? }
+  before_action :set_order_and_check_client, only: [:show, :edit, :update, :confirmed], if: -> { client_signed_in? }
   before_action :set_order_and_check_owner, only: [:show, :canceled, :approved], if: -> { owner_signed_in? }
 
   def index
@@ -64,6 +64,11 @@ class OrdersController < ApplicationController
     else
       render :show, status: 422
     end
+  end
+
+  def confirmed
+    @order.confirmed!
+    redirect_to @order, notice: 'Pedido confirmado com sucesso!'
   end
 
   private

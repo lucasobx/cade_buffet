@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   belongs_to :event_type
   belongs_to :payment_method, optional: true
 
-  enum status: { pending: 0, approved: 5, canceled: 9}
+  enum status: { pending: 0, approved: 5, confirmed: 7, canceled: 9}
 
   validates :code, :event_date, :estimated_guests, presence: true
   validate :event_date_is_future

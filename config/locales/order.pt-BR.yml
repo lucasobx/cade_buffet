@@ -2,6 +2,7 @@ pt-BR:
   pending: "Aguardando Avaliação"
   approved: "Aprovado"
   canceled: "Cancelado"
+  confirmed: "Confirmado"
   activerecord:
     models:
       order:
@@ -19,7 +20,7 @@ pt-BR:
         event_address: "Endereço"
         status: "Status" 
         final_price: "Valor Final"
-        price_valid_until: "Data de Validade"
+        price_valid_until: "Data-Limite"
         extra_fee: "Taxa Extra"
         discount: "Desconto"
         adjustment_description: "Detalhes do Ajuste"
