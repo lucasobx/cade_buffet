@@ -1,4 +1,4 @@
-<h1 class="mb-4">Detalhes do Pedido</h1>
+<h1 class="mb-4">Detalhes do Pedido <%= @order.code %></h1>
 
 <% if owner_signed_in? %>
   <% if @same_day_orders.any? %>
@@ -35,3 +35,5 @@
 <% if client_signed_in? %>
   <%= link_to 'Editar Pedido', edit_order_path(@order) %>
 <% end %>
+
+<%= link_to 'Voltar', root_path %>

@@ -39,7 +39,7 @@ describe 'Cliente vê seus próprios pedidos' do
     expect(page).to have_content "Data: #{I18n.localize(1.day.from_now.to_date)}"
   end
 
-  it 'e visita um pedido' do
+  it 'e vê detalhes de um pedido' do
     joao = Client.create!(name: 'Joao', personal_code: '94641091064', email: 'joao@email.com', password: '12345678')
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')
@@ -107,5 +107,16 @@ describe 'Cliente vê seus próprios pedidos' do
     click_on 'Meus Pedidos'
 
     expect(page).to have_content 'Você não possui nenhum pedido.'
+  end
+
+  it 'e retorna para a página inicial' do
+    joao = Client.create!(name: 'Joao', personal_code: '94641091064', email: 'joao@email.com', password: '12345678')
+
+    login_as joao, scope: :client
+    visit root_path
+    click_on 'Meus Pedidos'
+    click_on 'Voltar'
+
+    expect(current_path).to eq root_path
   end
 end

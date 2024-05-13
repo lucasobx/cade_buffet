@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe 'Dono de Buffet cadastra um buffet' do
+  it 'e deve estar autenticado' do
+    visit new_buffet_path
+
+    expect(current_path).to eq new_owner_session_path
+  end
+
   it 'com sucesso' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     PaymentMethod.create!(name: 'Cartão de Crédito')

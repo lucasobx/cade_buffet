@@ -119,4 +119,29 @@ describe 'Dono de Buffet edita tipo de evento' do
     expect(page).to have_content 'Nome não pode ficar em branco'
     expect(page).to have_content 'Cardápio não pode ficar em branco'
   end
+
+  it 'e retorna para os detalhes do buffet' do
+    owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+    cash = PaymentMethod.create!(name: 'Dinheiro')
+    pix = PaymentMethod.create!(name: 'Pix')
+    buffet = Buffet.create!(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casabuffet@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
+    buffet = EventType.create!(name: 'Festa de Casamento', description: 'Espaço luxuoso e confortável',
+                               min_guests: 15, max_guests: 150, duration: 240,
+                               menu_details: 'Doces, Salgados, Bebidas',
+                               alcohol_option: true, decoration_option: true, parking_service_option: true,
+                               location_option: false, buffet: buffet, base_price: 10000.0, extra_guest: 250.0,
+                               extra_hour: 1000.0, we_base_price: 15000.0, we_extra_guest: 400.0, we_extra_hour: 1500.0)
+
+    login_as owner, scope: :owner
+    visit root_path
+    click_on 'Meu Buffet'
+    click_on 'Editar Festa de Casamento'
+    click_on 'Voltar'
+
+    expect(current_path).to eq buffet_path(buffet.id)
+  end
 end
