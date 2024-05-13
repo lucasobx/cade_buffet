@@ -21,7 +21,7 @@ describe 'Visitante visita detalhes do buffet' do
     expect(page).to have_content 'Métodos de pagamento aceitos: Dinheiro, Pix'
   end
 
-  it 'e vê os tipos de eventos fornecidos' do
+  it 'e vê os tipos de eventos cadastrados' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')
     pix = PaymentMethod.create!(name: 'Pix')
@@ -51,5 +51,21 @@ describe 'Visitante visita detalhes do buffet' do
     expect(page).to have_content 'Preço Base para 15 Convidados: R$10000.0 - Fim de Semana: R$15000.0'
     expect(page).to have_content 'Taxa por Pessoa Excedente: R$250.0 - Fim de Semana: R$400.0'
     expect(page).to have_content 'Taxa por Hora Extra: R$1000.0 - Fim de Semana: R$1500.0'
+  end
+
+  it 'e não há tipos de eventos cadastrados' do
+    owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+    cash = PaymentMethod.create!(name: 'Dinheiro')
+    pix = PaymentMethod.create!(name: 'Pix')
+    Buffet.create!(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                   registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casabuffet@email.com',
+                   address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                   postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                   owner: owner, payment_methods: [cash, pix])
+
+    visit root_path
+    click_on 'Casamentos Buffet'
+
+    expect(page).to have_content 'Não existem eventos cadastrados para este Buffet.'
   end
 end
