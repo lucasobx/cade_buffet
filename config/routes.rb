@@ -20,4 +20,10 @@ Rails.application.routes.draw do
   scope :owner do
     get :my_buffet_orders, to: 'orders#my_buffet_orders', as: 'buffet_orders'
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :buffets, only: [:show]
+    end
+  end
 end
