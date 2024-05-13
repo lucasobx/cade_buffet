@@ -24,8 +24,22 @@ RSpec.describe Client, type: :model do
       expect(client.errors.include? :personal_code).to be true
     end
 
+    it 'CPF deve ser numérico' do
+      client = Client.new(name: 'Julia', personal_code: '946BC091060', email: 'julia@email.com', password: '12345678')
+
+      client.valid?
+      expect(client.errors.include? :personal_code).to be true
+    end
+
     it 'CPF não deve ter menos de 11 dígitos' do
       client = Client.new(name: 'Julia', personal_code: '9464109106', email: 'julia@email.com', password: '12345678')
+
+      client.valid?
+      expect(client.errors.include? :personal_code).to be true
+    end
+
+    it 'CPF não deve ter mais de 11 dígitos' do
+      client = Client.new(name: 'Julia', personal_code: '946410910655', email: 'julia@email.com', password: '12345678')
 
       client.valid?
       expect(client.errors.include? :personal_code).to be true
