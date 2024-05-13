@@ -193,11 +193,11 @@ describe 'Dono de Buffet vê lista de pedidos' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')
     pix = PaymentMethod.create!(name: 'Pix')
-    buffet = Buffet.create!(brand_name: 'Miniland', corporate_name: 'Miniland LTDA',
-                            registration_code: '00556164220103', phone_number: '(11)32441110', email: 'miniland@email.com',
-                            address: 'Av Martins, 50', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
-                            postal_code: '14770-070', description: 'Buffet especializado em festas temáticas',
-                            owner: owner, payment_methods: [cash, pix])
+    Buffet.create!(brand_name: 'Miniland', corporate_name: 'Miniland LTDA',
+                   registration_code: '00556164220103', phone_number: '(11)32441110', email: 'miniland@email.com',
+                   address: 'Av Martins, 50', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                   postal_code: '14770-070', description: 'Buffet especializado em festas temáticas',
+                   owner: owner, payment_methods: [cash, pix])
     
     login_as owner, scope: :owner
     visit root_path

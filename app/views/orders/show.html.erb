@@ -34,7 +34,11 @@
 </dl>
 
 <% if client_signed_in? %>
-  <%= link_to 'Editar Pedido', edit_order_path(@order) %>
+  <%= link_to 'Editar Pedido', edit_order_path(@order.id) %>
+<% end %>
+
+<% if owner_signed_in? && @order.pending? %>
+  <%= button_to 'Cancelar Pedido', canceled_order_path(@order.id) %>
 <% end %>
 
 <%= link_to 'Voltar', root_path %>
