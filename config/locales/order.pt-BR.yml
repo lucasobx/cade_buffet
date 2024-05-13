@@ -1,6 +1,6 @@
 pt-BR:
   pending: "Aguardando Avaliação"
-  confirmed: "Confirmado"
+  approved: "Aprovado"
   canceled: "Cancelado"
   activerecord:
     models:
@@ -18,3 +18,9 @@ pt-BR:
         code: "Código"
         event_address: "Endereço"
         status: "Status" 
+        final_price: "Valor Final"
+        price_valid_until: "Data de Validade"
+        extra_fee: "Taxa Extra"
+        discount: "Desconto"
+        adjustment_description: "Detalhes do Ajuste"
+        payment_method_id: "Método de Pagamento"

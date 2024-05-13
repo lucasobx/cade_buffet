@@ -25,7 +25,7 @@ describe 'Dono de Buffet vê lista de pedidos' do
     expect(current_path).to eq new_owner_session_path
   end
 
-  it 'e vê lista de pedidos' do
+  it 'e vê todos os pedidos' do
     joao = Client.create!(name: 'Joao', personal_code: '94641091064', email: 'joao@email.com', password: '12345678')
     maria = Client.create!(name: 'Maria', personal_code: '95551091000', email: 'maria@email.com', password: '12345678')
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
@@ -57,7 +57,7 @@ describe 'Dono de Buffet vê lista de pedidos' do
                            event_address: 'Rua das Flores, 10', status: :canceled)
     order3 = Order.create!(client: joao, buffet: buffet, event_type: event1, event_date: 1.week.from_now,
                            estimated_guests: 30, event_details: 'Festa de aniversário',
-                           event_address: 'Rua da Praça, 273', status: :confirmed)
+                           event_address: 'Rua da Praça, 273', status: :approved)
 
     login_as(owner, scope: :owner)
     visit root_path
@@ -68,7 +68,7 @@ describe 'Dono de Buffet vê lista de pedidos' do
     expect(page).to have_content order2.code
     expect(page).to have_content 'Cancelado'
     expect(page).to have_content order3.code
-    expect(page).to have_content 'Confirmado'
+    expect(page).to have_content 'Aprovado'
   end
 
   it 'e vê detalhes de um pedido' do

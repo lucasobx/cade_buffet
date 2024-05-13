@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :event_types, only: [:show, :edit, :update]
   resources :orders, only: [:show, :new, :create, :edit, :update] do
     post 'canceled', on: :member
+    patch 'approved', on: :member
   end
 
   scope :client do

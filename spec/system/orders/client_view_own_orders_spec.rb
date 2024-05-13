@@ -26,7 +26,7 @@ describe 'Cliente vê seus próprios pedidos' do
                            event_address: 'Rua da Praça, 273', status: :pending)
     order3 = Order.create!(client: joao, buffet: buffet, event_type: event, event_date: 1.week.from_now,
                            estimated_guests: 30, event_details: 'Festa de aniversário',
-                           event_address: 'Rua da Praça, 273', status: :confirmed)
+                           event_address: 'Rua da Praça, 273', status: :approved)
 
     login_as joao, scope: :client
     visit root_path

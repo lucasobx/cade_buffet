@@ -29,9 +29,9 @@
       </tr>
     </thead>
     <tbody>
-      <% @orders.select { |order| order.status == "confirmed" }.each do |order| %>
+      <% @orders.select { |order| order.status == "approved" }.each do |order| %>
         <tr>
-          <td><%= order.code %></td>
+          <td><%= link_to order.code, order_path(order.id) %></td>
           <td><%= order.event_type.name %></td>
           <td><%= I18n.translate(order.status) %></td>
         </tr>
@@ -51,7 +51,7 @@
     <tbody>
       <% @orders.select { |order| order.status == "canceled" }.each do |order| %>
         <tr>
-          <td><%= order.code %></td>
+          <td><%= link_to order.code, order_path(order.id) %></td>
           <td><%= order.event_type.name %></td>
           <td><%= I18n.translate(order.status) %></td>
         </tr>

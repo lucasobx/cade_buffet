@@ -2,13 +2,14 @@ class OrdersController < ApplicationController
   before_action :authenticate_client!, only: [:new, :create, :edit, :update, :index]
   before_action :authenticate_owner!, only: [:my_buffet_orders]
   before_action :set_order_and_check_client, only: [:show, :edit, :update], if: -> { client_signed_in? }
-  before_action :set_order_and_check_owner, only: [:show, :canceled], if: -> { owner_signed_in? }
+  before_action :set_order_and_check_owner, only: [:show, :canceled, :approved], if: -> { owner_signed_in? }
 
   def index
     @orders = current_client.orders
   end
   
   def show
+    @payment_methods = @order.buffet.payment_methods
     @same_day_orders = @order.buffet.orders.where(event_date: @order.event_date).where.not(id: @order.id)
   end
 
@@ -56,10 +57,20 @@ class OrdersController < ApplicationController
     redirect_to @order, notice: 'Pedido Cancelado!'
   end
 
+  def approved
+    if @order.update(order_params)
+      @order.update(status: :approved) 
+      redirect_to @order, notice: 'Pedido aprovado com sucesso!'
+    else
+      render :show, status: 422
+    end
+  end
+
   private
   
   def order_params
-    params.require(:order).permit(:event_date, :estimated_guests, :event_details, :event_address)
+    params.require(:order).permit(:event_date, :estimated_guests, :event_details, :event_address, :price_valid_until,
+                                  :extra_fee, :discount, :adjustment_description, :payment_method_id)
   end
 
   def set_order_and_check_client

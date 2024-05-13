@@ -60,5 +60,5 @@ order1 = Order.create!(client: client1, buffet: buffet1, event_type: event1, eve
                        estimated_guests: 30, event_details: 'Minha festa de casamento')
 order2 = Order.create!(client: client2, buffet: buffet1, event_type: event1, event_date: 7.days.from_now,
                        estimated_guests: 30, event_details: 'Festa de casamento dos meus filhos')
-order3 = Order.create!(client: client3, buffet: buffet1, event_type: event1, event_date: 7.days.from_now,
+order3 = Order.create!(client: client3, buffet: buffet1, event_type: event1, event_date: 5.days.from_now,
                        estimated_guests: 30, event_details: 'Festa de casamento dos meus pais')                       
