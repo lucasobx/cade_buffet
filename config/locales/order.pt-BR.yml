@@ -4,7 +4,9 @@ pt-BR:
   canceled: "Cancelado"
   activerecord:
     models:
-      order: "Pedido"
+      order:
+        one: Pedido
+        other: Pedidos
     attributes:
       order:
         client_id: "Cliente"

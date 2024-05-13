@@ -134,7 +134,7 @@ describe 'Dono de Buffet vê lista de pedidos' do
     click_on 'Pedidos'
     click_on order1.code
 
-    expect(page).to have_content 'Atenção: Existem outros 2 pedidos para o mesmo dia!'
+    expect(page).to have_content 'Atenção: Há mais 2 pedidos agendados para o mesmo dia!'
     expect(page).to have_link order2.code
     expect(page).to have_link order3.code
   end
@@ -169,7 +169,7 @@ describe 'Dono de Buffet vê lista de pedidos' do
     click_on 'Meus Pedidos'
     click_on order1.code
 
-    expect(page).not_to have_content 'Atenção: Existem outros 1 pedidos para o mesmo dia!'
+    expect(page).not_to have_content 'Atenção: Há mais 1 pedido agendado para o mesmo dia!'
   end
 
   it 'e não há pedidos para o buffet' do

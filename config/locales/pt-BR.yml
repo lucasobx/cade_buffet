@@ -2,3 +2,6 @@ pt-BR:
   found:
     one: "encontrado"
     other: "encontrados"
+  scheduled:
+    one: "agendado"
+    other: "agendados"
