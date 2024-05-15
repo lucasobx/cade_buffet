@@ -89,6 +89,35 @@ describe 'Dono de Buffet edita tipo de evento' do
     expect(page).to have_content 'Preço Base para 30 Convidados: R$8000.0'
   end
 
+  it 'e faz upload de imagens' do
+    owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+    cash = PaymentMethod.create!(name: 'Dinheiro')
+    pix = PaymentMethod.create!(name: 'Pix')
+    buffet = Buffet.create!(brand_name: 'Casamentos Buffet', corporate_name: 'Casamentos Buffet LTDA',
+                            registration_code: '73456164000100', phone_number: '(11)00001111', email: 'casabuffet@email.com',
+                            address: 'Av Machado, 650', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                            postal_code: '14980-970', description: 'Buffet especializado em casamentos',
+                            owner: owner, payment_methods: [cash, pix])
+    EventType.create!(name: 'Festa de Casamento', description: 'Espaço luxuoso e confortável',
+                      min_guests: 15, max_guests: 150, duration: 240,
+                      menu_details: 'Doces, Salgados, Bebidas',
+                      alcohol_option: true, decoration_option: true, parking_service_option: true,
+                      location_option: false, buffet: buffet, base_price: 10000.0, extra_guest: 250.0,
+                      extra_hour: 1000.0, we_base_price: 15000.0, we_extra_guest: 400.0, we_extra_hour: 1500.0)
+
+    login_as owner, scope: :owner
+    visit root_path
+    within 'nav' do
+      click_on 'Meu Buffet'
+    end
+    click_on 'Editar Festa de Casamento'
+    attach_file 'Fotos', [Rails.root.join('spec', 'files', 'evento1.jpg'), Rails.root.join('spec', 'files', 'evento2.jpg')]
+    click_on 'Enviar'
+
+    expect(page).to have_css('img[src*="evento1.jpg"]')
+    expect(page).to have_css('img[src*="evento2.jpg"]')
+  end
+
   it 'e deve preencher todos os campos' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')

@@ -50,6 +50,7 @@ describe 'Dono de Buffet cadastra tipo de evento' do
     expect(page).to have_content 'Preço no Fim de Semana'
     expect(page).to have_content 'Taxa por Pessoa Excedente no Fim de Semana'
     expect(page).to have_content 'Taxa por Hora Extra no Fim de Semana'
+    expect(page).to have_content 'Fotos'
     expect(page).to have_content 'Local'
   end
 
@@ -84,6 +85,7 @@ describe 'Dono de Buffet cadastra tipo de evento' do
     fill_in 'Preço no Fim de Semana', with: '15000'
     fill_in 'Taxa por Pessoa Excedente no Fim de Semana', with: '400'
     fill_in 'Taxa por Hora Extra no Fim de Semana', with: '1500'
+    attach_file 'Fotos', Rails.root.join('spec', 'files', 'evento1.jpg')
     click_on 'Enviar'
 
     expect(page).to have_content 'Tipo de Evento cadastrado com sucesso.'
@@ -99,6 +101,7 @@ describe 'Dono de Buffet cadastra tipo de evento' do
     expect(page).to have_content 'Preço Base para 15 Convidados: R$10000.0 - Fim de Semana: R$15000.0'
     expect(page).to have_content 'Taxa por Pessoa Excedente: R$250.0 - Fim de Semana: R$400.0'
     expect(page).to have_content 'Taxa por Hora Extra: R$1000.0 - Fim de Semana: R$1500.0'
+    expect(page).to have_css('img[src*="evento1.jpg"]')
   end
 
   it 'e deve preencher todos os campos' do

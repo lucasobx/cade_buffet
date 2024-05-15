@@ -84,6 +84,10 @@
     </div>
   </fieldset>
 
+  <fieldset>
+    <%= f.label :pictures, "Fotos" %>
+    <%= f.file_field :pictures, multiple: true %>
+  </fieldset>
   <div>
     <%= f.submit 'Enviar' %>
   </div>
