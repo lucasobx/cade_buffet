@@ -57,7 +57,7 @@ describe 'Dono de Buffet informa novo status de pedido' do
                               alcohol_option: false, decoration_option: true, parking_service_option: true,
                               location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
                               extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
-    order = Order.create!(client: client, buffet: buffet, event_type: event, event_date: 5.day.from_now,
+    order = Order.create!(client: client, buffet: buffet, event_type: event, event_date: next_weekend_from_today,
                           estimated_guests: 30, event_details: 'Festa de aniversário',
                           event_address: 'Rua da Praça, 273', status: :pending)
 

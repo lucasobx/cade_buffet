@@ -144,4 +144,50 @@ RSpec.describe Order, type: :model do
       expect(order.code).to eq original_code
     end
   end
+
+  describe 'calcula o preço final' do
+    it 'durante a semana' do
+      client = Client.create!(name: 'Julia', personal_code: '94641091064', email: 'julia@email.com', password: '12345678')
+      owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+      cash = PaymentMethod.create!(name: 'Dinheiro')
+      pix = PaymentMethod.create!(name: 'Pix')
+      buffet = Buffet.create!(brand_name: 'Miniland', corporate_name: 'Miniland LTDA',
+                              registration_code: '00556164220103', phone_number: '(11)32441110', email: 'miniland@email.com',
+                              address: 'Av Martins, 50', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                              postal_code: '14770-070', description: 'Buffet especializado em festas temáticas',
+                              owner: owner, payment_methods: [cash, pix])
+      event = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
+                                min_guests: 10, max_guests: 80, duration: 240,
+                                menu_details: 'Doces, Salgados, Bebidas',
+                                alcohol_option: false, decoration_option: true, parking_service_option: true,
+                                location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
+                                extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
+      order = Order.create!(client: client, buffet: buffet, event_type: event, event_date: next_weekday_from_today,
+                            estimated_guests: 15, event_details: 'Festa de aniversário', event_address: 'Rua das Flores')
+
+      expect(order.final_price).to eq(5500)
+    end
+
+    it 'durante o fim de semana' do
+      client = Client.create!(name: 'Julia', personal_code: '94641091064', email: 'julia@email.com', password: '12345678')
+      owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+      cash = PaymentMethod.create!(name: 'Dinheiro')
+      pix = PaymentMethod.create!(name: 'Pix')
+      buffet = Buffet.create!(brand_name: 'Miniland', corporate_name: 'Miniland LTDA',
+                              registration_code: '00556164220103', phone_number: '(11)32441110', email: 'miniland@email.com',
+                              address: 'Av Martins, 50', neighborhood: 'Jardim do Sol', city: 'Sales', state: 'SP',
+                              postal_code: '14770-070', description: 'Buffet especializado em festas temáticas',
+                              owner: owner, payment_methods: [cash, pix])
+      event = EventType.create!(name: 'Festa dos Heróis', description: 'Festa infantil com temática de heróis',
+                                min_guests: 10, max_guests: 80, duration: 240,
+                                menu_details: 'Doces, Salgados, Bebidas',
+                                alcohol_option: false, decoration_option: true, parking_service_option: true,
+                                location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
+                                extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
+      order = Order.create!(client: client, buffet: buffet, event_type: event, event_date: next_weekend_from_today,
+                            estimated_guests: 15, event_details: 'Festa de aniversário', event_address: 'Rua das Flores')
+
+      expect(order.final_price).to eq(9000)
+    end
+  end
 end
