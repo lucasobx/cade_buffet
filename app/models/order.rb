@@ -13,6 +13,24 @@ class Order < ApplicationRecord
   before_validation :generate_code, on: :create
   before_save :calculate_final_price
 
+  private
+
+  def generate_code
+    self.code = SecureRandom.alphanumeric(8).upcase
+  end
+
+  def event_date_is_future
+    if self.event_date.present? && self.event_date <= Date.today
+      self.errors.add :event_date, "deve ser futura."
+    end    
+  end
+
+  def unique_pending_order_per_buffet
+    if Order.where(client: client, buffet: buffet, status: :pending).exists?
+      errors.add(:base, 'Já existe um pedido pendente para este buffet.')
+    end
+  end
+
   def calculate_final_price
     base_guests = event_type.min_guests
     if event_date.on_weekend?
@@ -31,23 +49,5 @@ class Order < ApplicationRecord
     end
 
     self.final_price += extra_fee.to_f - discount.to_f
-  end
-
-  private
-
-  def generate_code
-    self.code = SecureRandom.alphanumeric(8).upcase
-  end
-
-  def event_date_is_future
-    if self.event_date.present? && self.event_date <= Date.today
-      self.errors.add :event_date, "deve ser futura."
-    end    
-  end
-
-  def unique_pending_order_per_buffet
-    if Order.where(client: client, buffet: buffet, status: :pending).exists?
-      errors.add(:base, 'Já existe um pedido pendente para este buffet.')
-    end
   end
 end

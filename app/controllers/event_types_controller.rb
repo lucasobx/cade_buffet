@@ -1,20 +1,19 @@
 class EventTypesController < ApplicationController
+  before_action :set_buffet, only: [:new, :create]
   before_action :set_event_type, only: [:edit, :update]
   before_action :authenticate_owner!, only: [:new, :create, :edit, :update]
   before_action :check_owner, only: [:edit, :update]
 
   def new
-    @buffet = Buffet.find(params[:buffet_id])
     @event_type = EventType.new
   end
 
   def create
-    @buffet = Buffet.find(params[:buffet_id])
     @event_type = @buffet.event_types.create(event_type_params)
     if @event_type.save
       redirect_to @buffet, notice: 'Tipo de Evento cadastrado com sucesso.'
     else
-      flash.now[:notice] = 'Não foi possível cadastrar o tipo de evento.'
+      flash.now[:alert] = 'Não foi possível cadastrar o tipo de evento.'
       render 'new', status: 422
     end
   end
@@ -25,7 +24,7 @@ class EventTypesController < ApplicationController
     if @event_type.update(event_type_params)
       redirect_to @event_type.buffet, notice: 'Tipo de Evento atualizado com sucesso.'
     else
-      flash.now[:notice] = 'Não foi possível atualizar o tipo de evento.'
+      flash.now[:alert] = 'Não foi possível atualizar o tipo de evento.'
       render 'edit', status: 422
     end
   end
@@ -36,6 +35,10 @@ class EventTypesController < ApplicationController
     unless current_owner == @event_type.buffet.owner
       redirect_to root_path
     end
+  end
+
+  def set_buffet
+    @buffet = Buffet.find(params[:buffet_id])
   end
 
   def set_event_type

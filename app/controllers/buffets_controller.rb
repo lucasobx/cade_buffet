@@ -3,6 +3,7 @@ class BuffetsController < ApplicationController
   before_action :authenticate_owner!, only: [:new, :create, :edit, :update]
   before_action :check_existing_buffet, only: [:new, :create]
   before_action :check_owner, only: [:edit, :update]
+  before_action :set_payment_methods, only: [:create, :update]
 
   def show
     @event_types = @buffet.event_types
@@ -16,11 +17,11 @@ class BuffetsController < ApplicationController
   def create
     @buffet = Buffet.new(buffet_params)
     @buffet.owner = current_owner
-    @buffet.payment_methods << PaymentMethod.where(id: params[:buffet][:payment_method_ids])
+    @buffet.payment_methods << @payment_methods
     if @buffet.save 
       redirect_to root_path, notice: 'Buffet cadastrado com sucesso.'
     else
-      flash.now[:notice] = 'Não foi possível cadastrar o Buffet.'
+      flash.now[:alert] = 'Não foi possível cadastrar o Buffet.'
       render 'new', status: 422
     end
   end
@@ -29,10 +30,10 @@ class BuffetsController < ApplicationController
 
   def update
     if @buffet.update(buffet_params)
-      @buffet.payment_methods = PaymentMethod.where(id: params[:buffet][:payment_method_ids])
+      @buffet.payment_methods = @payment_methods
       redirect_to @buffet, notice: 'Buffet atualizado com sucesso.'
     else
-      flash.now[:notice] = 'Não foi possível atualizar o buffet.'
+      flash.now[:alert] = 'Não foi possível atualizar o buffet.'
       render 'new', status: 422
     end
   end
@@ -60,6 +61,10 @@ class BuffetsController < ApplicationController
 
   def set_buffet
     @buffet = Buffet.find(params[:id])
+  end
+
+  def set_payment_methods
+    @payment_methods = PaymentMethod.where(id: params[:buffet][:payment_method_ids])
   end
 
   def buffet_params

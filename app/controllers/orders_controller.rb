@@ -3,6 +3,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_owner!, only: [:my_buffet_orders]
   before_action :set_order_and_check_client, only: [:show, :edit, :update, :confirmed], if: -> { client_signed_in? }
   before_action :set_order_and_check_owner, only: [:show, :canceled, :approved], if: -> { owner_signed_in? }
+  before_action :set_event_type_from_params, only: [:new, :create]
+  before_action :set_event_type_from_order, only: [:edit, :update]
 
   def index
     @orders = current_client.orders
@@ -14,13 +16,11 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @event_type = EventType.find(params[:event_type_id])
     @order = Order.new
     @show_address = @event_type.location_option
   end
 
   def create
-    @event_type = EventType.find(params[:event_type_id])
     @order = @event_type.orders.new(order_params)
     @order.client = current_client
     @order.buffet = @event_type.buffet
@@ -36,16 +36,13 @@ class OrdersController < ApplicationController
     end
   end
 
-  def edit
-    @event_type = @order.event_type
-  end
+  def edit; end
 
   def update
-   @event_type = @order.event_type
    if @order.update(order_params)
     redirect_to @order, notice: 'Pedido atualizado com sucesso!'
    else
-    flash.now[:notice] = 'Não foi possível atualizar o pedido.'
+    flash.now[:alert] = 'Não foi possível atualizar o pedido.'
     render 'edit', status: 422
    end
   end
@@ -93,5 +90,13 @@ class OrdersController < ApplicationController
     if @order.buffet.owner != current_owner
       return redirect_to root_path, alert: 'Você não possui acesso a este pedido.'
     end
+  end
+
+  def set_event_type_from_params
+    @event_type = EventType.find(params[:event_type_id])
+  end
+
+  def set_event_type_from_order
+    @event_type = @order.event_type
   end
 end
