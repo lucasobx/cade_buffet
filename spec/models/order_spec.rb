@@ -18,7 +18,7 @@ RSpec.describe Order, type: :model do
                                 alcohol_option: false, decoration_option: true, parking_service_option: true,
                                 location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
                                 extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
-      order = Order.new(client: client, buffet: buffet, event_type: event, event_date: '10/10/2050',
+      order = Order.new(client: client, buffet: buffet, event_type: event, event_date: 1.week.from_now,
                         estimated_guests: 30, event_details: 'Festa de aniversário', event_address: 'Rua das Flores') 
 
       expect(order.valid?).to be true
@@ -84,7 +84,7 @@ RSpec.describe Order, type: :model do
                                 alcohol_option: false, decoration_option: true, parking_service_option: true,
                                 location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
                                 extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
-      order = Order.new(client: client, buffet: buffet, event_type: event, event_date: '10/10/2050',
+      order = Order.new(client: client, buffet: buffet, event_type: event, event_date: 1.week.from_now,
                         estimated_guests: 30, event_details: 'Festa de aniversário', event_address: 'Rua das Flores')
 
       order.save!
@@ -109,9 +109,9 @@ RSpec.describe Order, type: :model do
                                 alcohol_option: false, decoration_option: true, parking_service_option: true,
                                 location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
                                 extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
-      order1 = Order.create!(client: client, buffet: buffet, event_type: event, event_date: '10/10/2050',
+      order1 = Order.create!(client: client, buffet: buffet, event_type: event, event_date: 5.days.from_now,
                               estimated_guests: 30, event_details: 'Festa de aniversário', event_address: 'Rua das Flores')
-      order2 = Order.new(client: client, buffet: buffet, event_type: event, event_date: '10/10/2030',
+      order2 = Order.new(client: client, buffet: buffet, event_type: event, event_date: 1.week.from_now,
                           estimated_guests: 30, event_details: 'Festa de aniversário', event_address: 'Rua das Flores')                             
 
       order2.save!
