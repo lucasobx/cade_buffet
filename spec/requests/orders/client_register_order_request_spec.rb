@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Cliente faz pedido para um buffet' do
+describe 'POST /orders' do
   it 'e já possui um pedido pendente' do
     joao = Client.create!(name: 'Joao', personal_code: '94441092264', email: 'joao@email.com', password: '12345678')
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')

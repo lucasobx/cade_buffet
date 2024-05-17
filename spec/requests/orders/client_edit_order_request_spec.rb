@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Cliente edita um pedido' do
+describe 'PATCH /order' do
   it 'e não é o dono' do
     joao = Client.create!(name: 'Joao', personal_code: '94441092264', email: 'joao@email.com', password: '12345678')
     julia = Client.create!(name: 'Julia', personal_code: '94641091064', email: 'julia@email.com', password: '12345678')
