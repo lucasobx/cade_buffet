@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Cliente faz pedido para um buffet' do
+describe 'cliente faz pedido para um buffet' do
   it 'e deve estar autenticado' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')
@@ -197,7 +197,7 @@ describe 'Cliente faz pedido para um buffet' do
     click_on 'Agendar Festa dos Heróis'
     click_on 'Voltar'
 
-    expect(current_path).to eq buffet_path(buffet.id)
+    expect(current_path).to eq buffet_path(buffet)
   end
 
   it 'e não vê link para novo pedido se já tiver um pedido pendente para este buffet' do

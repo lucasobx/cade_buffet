@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Dono de Buffet vê lista de pedidos' do
+describe 'dono de buffet vê lista de pedidos' do
   it 'e deve estar autenticado' do
     joao = Client.create!(name: 'Joao', personal_code: '94641091064', email: 'joao@email.com', password: '12345678')
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')

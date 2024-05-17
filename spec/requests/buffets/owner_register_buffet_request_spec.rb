@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "POST /buffets" do
-  it "does not allow an owner to create more than one buffet" do
+  it "e não pode cadastrar um segundo buffet" do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')
     pix = PaymentMethod.create!(name: 'Pix')

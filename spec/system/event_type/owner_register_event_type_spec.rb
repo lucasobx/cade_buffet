@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Dono de Buffet cadastra tipo de evento' do
+describe 'dono de buffet cadastra tipo de evento' do
   it 'e deve estar autenticado' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')
@@ -11,7 +11,7 @@ describe 'Dono de Buffet cadastra tipo de evento' do
                             postal_code: '14980-970', description: 'Buffet especializado em casamentos',
                             owner: owner, payment_methods: [cash, pix])
         
-    visit new_buffet_event_type_path(buffet.id)
+    visit new_buffet_event_type_path(buffet)
 
     expect(current_path).to eq new_owner_session_path
   end
@@ -33,7 +33,7 @@ describe 'Dono de Buffet cadastra tipo de evento' do
     end
     click_on 'Cadastrar Tipo de Evento'
 
-    expect(current_path).to eq new_buffet_event_type_path(buffet.id)
+    expect(current_path).to eq new_buffet_event_type_path(buffet)
     expect(page).to have_content'Novo Tipo de Evento'
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Descrição'
@@ -147,6 +147,6 @@ describe 'Dono de Buffet cadastra tipo de evento' do
     click_on 'Cadastrar Tipo de Evento'
     click_on 'Voltar'
 
-    expect(current_path).to eq buffet_path(buffet.id)
+    expect(current_path).to eq buffet_path(buffet)
   end
 end

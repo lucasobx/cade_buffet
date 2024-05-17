@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Cliente confirma pedido aprovado' do
+describe 'cliente confirma pedido aprovado' do
   it 'a partir dos detalhes do pedido' do
     client = Client.create!(name: 'Joao', personal_code: '94641091064', email: 'joao@email.com', password: '12345678')
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
@@ -58,7 +58,7 @@ describe 'Cliente confirma pedido aprovado' do
     click_on order.code
     click_on 'Confirmar Pedido'
 
-    expect(current_path).to eq order_path(order.id)
+    expect(current_path).to eq order_path(order)
     expect(page).to have_content 'Pedido confirmado com sucesso!'
     expect(page).to have_content 'Status: Confirmado'
     expect(page).not_to have_button 'Confirmar Pedido'

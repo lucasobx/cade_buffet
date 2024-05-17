@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Cliente vê seus próprios pedidos' do
+describe 'cliente vê seus próprios pedidos' do
   it 'e não vê pedidos de outros clientes' do
     joao = Client.create!(name: 'Joao', personal_code: '94641091064', email: 'joao@email.com', password: '12345678')
     maria = Client.create!(name: 'Maria', personal_code: '98661291666', email: 'maria@email.com', password: '12345678')

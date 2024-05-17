@@ -1,10 +1,19 @@
 require 'rails_helper'
 
-describe 'Dono de Buffet cadastra um buffet' do
+describe 'dono de buffet cadastra um buffet' do
   it 'e deve estar autenticado' do
     visit new_buffet_path
 
     expect(current_path).to eq new_owner_session_path
+  end
+
+  it 'e não vê link meu buffet até que tenha um buffet cadastrado' do
+    owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
+
+    login_as owner, scope: :owner
+    visit new_buffet_path
+
+    expect(page).not_to have_link 'Meu Buffet'
   end
 
   it 'com sucesso' do
@@ -31,6 +40,7 @@ describe 'Dono de Buffet cadastra um buffet' do
     expect(page).to have_content 'Buffet cadastrado com sucesso.'
     expect(page).to have_content 'Casamentos Buffet'
     expect(page).to have_content 'Sales, SP'
+    expect(page).to have_link 'Meu Buffet'
   end
 
   it 'e deve preencher todos os campos' do

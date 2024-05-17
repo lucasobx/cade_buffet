@@ -23,7 +23,7 @@ describe 'PATCH /order' do
                           event_address: 'Rua da Praça, 273', status: :pending)
 
     login_as joao, scope: :client
-    patch(order_path(order.id), params: { order: { event_date: 1.week.from_now }})
+    patch(order_path(order), params: { order: { event_date: 1.week.from_now }})
 
     expect(response).to redirect_to root_path
   end

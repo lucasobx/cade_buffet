@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Visitante visita detalhes do buffet' do
+describe 'visitante acessa detalhes do buffet' do
   it 'e vê informações adicionais' do
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Cliente edita pedido' do
+describe 'cliente edita pedido' do
   it 'e deve estar autenticado' do
     client = Client.create!(name: 'Julia', personal_code: '94641091064', email: 'julia@email.com', password: '12345678')
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
@@ -21,7 +21,7 @@ describe 'Cliente edita pedido' do
                           estimated_guests: 30, event_details: 'Festa de aniversário',
                           event_address: 'Rua da Praça, 273', status: :pending)
     
-    visit edit_order_path(order.id)
+    visit edit_order_path(order)
 
     expect(current_path).to eq new_client_session_path
   end
@@ -54,7 +54,7 @@ describe 'Cliente edita pedido' do
     fill_in 'Data', with: 5.days.from_now
     click_on 'Enviar'
 
-    expect(current_path).to eq order_path(order.id)
+    expect(current_path).to eq order_path(order)
     expect(page).to have_content 'Pedido atualizado com sucesso!'
     expect(page).to have_content "Data: #{I18n.localize(5.days.from_now.to_date)}"
   end
@@ -113,7 +113,7 @@ describe 'Cliente edita pedido' do
                           event_address: 'Rua da Praça, 273', status: :pending)
 
     login_as joao, scope: :client
-    visit edit_order_path(order.id)
+    visit edit_order_path(order)
 
     expect(current_path).to eq root_path
   end
@@ -145,6 +145,6 @@ describe 'Cliente edita pedido' do
     click_on 'Editar Pedido'
     click_on 'Voltar'
 
-    expect(current_path).to eq order_path(order.id)
+    expect(current_path).to eq order_path(order)
   end
 end

@@ -11,7 +11,7 @@ describe 'Dono de Buffet edita um buffet' do
                    postal_code: '14980-970', description: 'Buffet especializado em casamentos',
                    owner: owner, payment_methods: [credit, cash])
     
-    visit edit_buffet_path(buffet.id)
+    visit edit_buffet_path(buffet)
 
     expect(current_path).to eq new_owner_session_path
   end
@@ -135,6 +135,6 @@ describe 'Dono de Buffet edita um buffet' do
     click_on 'Editar'
     click_on 'Voltar'
 
-    expect(current_path).to eq buffet_path(buffet.id)
+    expect(current_path).to eq buffet_path(buffet)
   end
 end

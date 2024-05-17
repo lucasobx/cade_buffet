@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Dono de Buffet informa novo status de pedido' do
+describe 'dono de buffet informa novo status de pedido' do
   it 'e pedido é aprovado a partir dos detalhes do pedido' do
     client = Client.create!(name: 'Joao', personal_code: '94641091064', email: 'joao@email.com', password: '12345678')
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
@@ -111,7 +111,7 @@ describe 'Dono de Buffet informa novo status de pedido' do
     click_on order.code
     click_on 'Cancelar Pedido'
 
-    expect(current_path).to eq order_path(order.id)
+    expect(current_path).to eq order_path(order)
     expect(page).to have_content 'Status: Cancelado'
     expect(page).not_to have_button 'Aprovar Pedido'
     expect(page).not_to have_button 'Cancelar Pedido'

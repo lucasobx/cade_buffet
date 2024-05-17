@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe EventType, type: :model do
   describe '#valid?' do
     context 'presence' do
-      it 'Nome é obrigatório' do
+      it 'nome é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -24,7 +24,7 @@ RSpec.describe EventType, type: :model do
         expect(event.errors.include? :name).to be true
       end
 
-      it 'Descrição é obrigatório' do
+      it 'descrição é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -45,7 +45,7 @@ RSpec.describe EventType, type: :model do
         expect(event.errors.include? :description).to be true
       end
 
-      it 'Mínimo de Convidados é obrigatório' do
+      it 'mínimo de convidados é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -66,7 +66,7 @@ RSpec.describe EventType, type: :model do
         expect(event.errors.include? :min_guests).to be true
       end
 
-      it 'Máximo de Convidados é obrigatório' do
+      it 'máximo de convidados é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -87,7 +87,7 @@ RSpec.describe EventType, type: :model do
         expect(event.errors.include? :max_guests).to be true
       end
 
-      it 'Duração é obrigatório' do
+      it 'duração é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -108,7 +108,7 @@ RSpec.describe EventType, type: :model do
         expect(event.errors.include? :duration).to be true
       end
 
-      it 'Cardápio é obrigatório' do
+      it 'cardápio é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -129,7 +129,7 @@ RSpec.describe EventType, type: :model do
         expect(event.errors.include? :menu_details).to be true
       end
 
-      it 'Preço Base é obrigatório' do
+      it 'preço base é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -150,7 +150,7 @@ RSpec.describe EventType, type: :model do
         expect(event.errors.include? :base_price).to be true
       end
 
-      it 'Taxa por Pessoa Excedente é obrigatório' do
+      it 'taxa por pessoa excedente é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -171,7 +171,7 @@ RSpec.describe EventType, type: :model do
         expect(event.errors.include? :extra_guest).to be true
       end
 
-      it 'Taxa por Hora Extra é obrigatório' do
+      it 'taxa por hora extra é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -192,7 +192,7 @@ RSpec.describe EventType, type: :model do
         expect(event.errors.include? :extra_hour).to be true
       end
 
-      it 'Preço no Fim de Semana é obrigatório' do
+      it 'preço no fim de semana é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -213,7 +213,7 @@ RSpec.describe EventType, type: :model do
         expect(event.errors.include? :we_base_price).to be true
       end
 
-      it 'Taxa por Pessoa Excedente no Fim de Semana é obrigatório' do
+      it 'taxa por pessoa excedente no fim de semana é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -234,7 +234,7 @@ RSpec.describe EventType, type: :model do
         expect(event.errors.include? :we_extra_guest).to be true
       end
 
-      it 'Taxa por Hora Extra no Fim de Semana é obrigatório' do
+      it 'taxa por hora extra no fim de semana é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')

@@ -26,7 +26,7 @@ describe 'POST /orders' do
                                          event_details: 'Festa de aniversário', event_address: 'Rua da Praça, 273' },
                                          event_type_id: event.id }
 
-    expect(response).to redirect_to buffet_path(buffet.id)
+    expect(response).to redirect_to buffet_path(buffet)
     expect(flash[:alert]).to eq 'Já existe um pedido pendente para este buffet.'
   end
 end

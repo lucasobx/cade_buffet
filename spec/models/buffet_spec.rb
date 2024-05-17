@@ -32,7 +32,7 @@ RSpec.describe Buffet, type: :model do
     end
 
     context 'presence' do
-      it 'Nome Fantasia é obrigatório' do
+      it 'nome fantasia é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -46,7 +46,7 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors.include? :brand_name).to eq true
       end
 
-      it 'Razão Social é obrigatório' do
+      it 'razão social é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -60,7 +60,7 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors.include? :corporate_name).to eq true
       end
 
-      it 'CNPJ é obrigatório' do
+      it 'cnpj é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -74,7 +74,7 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors.include? :registration_code).to eq true
       end
 
-      it 'Telefone é obrigatório' do
+      it 'telefone é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -88,7 +88,7 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors.include? :phone_number).to eq true
       end
 
-      it 'E-mail é obrigatório' do
+      it 'e-mail é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -102,7 +102,7 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors.include? :email).to eq true
       end
 
-      it 'Endereço é obrigatório' do
+      it 'endereço é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -116,7 +116,7 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors.include? :address).to eq true
       end
 
-      it 'Bairro é obrigatório' do
+      it 'bairro é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -130,7 +130,7 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors.include? :neighborhood).to eq true
       end
 
-      it 'Cidade é obrigatório' do
+      it 'cidade é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -144,7 +144,7 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors.include? :city).to eq true
       end
 
-      it 'Estado é obrigatório' do
+      it 'estado é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -158,7 +158,7 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors.include? :state).to eq true
       end
 
-      it 'CEP é obrigatório' do
+      it 'cep é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -172,7 +172,7 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors.include? :postal_code).to eq true
       end
 
-      it 'Descrição é obrigatório' do
+      it 'descrição é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')
         pix = PaymentMethod.create!(name: 'Pix')
@@ -186,7 +186,7 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors.include? :description).to eq true
       end
 
-      it 'Método de pagamento é obrigatório' do
+      it 'método de pagamento é obrigatório' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         PaymentMethod.create!(name: 'Dinheiro')
         PaymentMethod.create!(name: 'Pix')
@@ -202,7 +202,7 @@ RSpec.describe Buffet, type: :model do
     end
 
     context 'uniqueness' do
-      it 'CNPJ deve ser único' do
+      it 'cnpj deve ser único' do
         owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
         second_owner = Owner.create!(name: 'Julia', email: 'julia@email.com', password: '12345678')
         cash = PaymentMethod.create!(name: 'Dinheiro')

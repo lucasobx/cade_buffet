@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Visitante busca por um buffet' do
+describe 'visitante busca por um buffet' do
   it 'a partir do menu' do
     visit root_path
 
