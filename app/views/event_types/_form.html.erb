@@ -1,94 +1,99 @@
 <% if @event_type.errors.any? %>
-  <p>Verifique os erros abaixo:</p>
-  <ul>
-  <% @event_type.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-  </ul>
+  <div class="alert alert-danger">
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @event_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
-<%= form_with(model: [@buffet, @event_type]) do |f| %>
-  <fieldset>
+<%= form_with(model: [@buffet, @event_type], class: 'mt-4') do |f| %>
+  <fieldset class="mb-4">
     <legend>Informações do Tipo de Evento</legend>
-    <div>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+    <div class="mb-3">
+      <%= f.label :name, class: 'form-label' %>
+      <%= f.text_field :name, class: 'form-control' %>
     </div>
-    <div>
-      <%= f.label :description %>
-      <%= f.text_area :description %>
+    <div class="mb-3">
+      <%= f.label :description, class: 'form-label' %>
+      <%= f.text_area :description, class: 'form-control' %>
     </div>
-    <div>
-      <%= f.label :min_guests %>
-      <%= f.number_field :min_guests %>
+    <div class="mb-3">
+      <%= f.label :min_guests, class: 'form-label' %>
+      <%= f.number_field :min_guests, class: 'form-control' %>
     </div>
-    <div>
-      <%= f.label :max_guests %>
-      <%= f.number_field :max_guests %>
+    <div class="mb-3">
+      <%= f.label :max_guests, class: 'form-label' %>
+      <%= f.number_field :max_guests, class: 'form-control' %>
     </div>
-    <div>
-      <%= f.label :duration %>
-      <%= f.number_field :duration %>
+    <div class="mb-3">
+      <%= f.label :duration, class: 'form-label' %>
+      <%= f.number_field :duration, class: 'form-control' %>
     </div>
-    <div>
-      <%= f.label :menu_details %>
-      <%= f.text_area :menu_details %>
+    <div class="mb-3">
+      <%= f.label :menu_details, class: 'form-label' %>
+      <%= f.text_area :menu_details, class: 'form-control' %>
     </div>
-    <div>
-      <%= f.label :alcohol_option %>
-      <%= f.check_box :alcohol_option %>
+    <div class="form-check mb-3">
+      <%= f.label :alcohol_option, class: 'form-check-label' %>
+      <%= f.check_box :alcohol_option, class: 'form-check-input' %>
     </div>
-    <div>
-      <%= f.label :decoration_option %>
-      <%= f.check_box :decoration_option %>
+    <div class="form-check mb-3">
+      <%= f.label :decoration_option, class: 'form-check-label' %>
+      <%= f.check_box :decoration_option, class: 'form-check-input' %>
     </div>
-    <div>
-      <%= f.label :parking_service_option %>
-      <%= f.check_box :parking_service_option %>
+    <div class="form-check mb-3">
+      <%= f.label :parking_service_option, class: 'form-check-label' %>
+      <%= f.check_box :parking_service_option, class: 'form-check-input' %>
     </div>
-    <div>
-      <%= f.label :location_option %>
-      <%= f.check_box :location_option %>
+    <div class="form-check mb-3">
+      <%= f.label :location_option, class: 'form-check-label' %>
+      <%= f.check_box :location_option, class: 'form-check-input' %>
     </div>
   </fieldset>
 
-  <fieldset>
+  <fieldset class="mb-4">
     <legend>Preços durante a semana</legend>
-    <div>
-      <%= f.label :base_price %>
-      <%= f.number_field :base_price %>
+    <div class="mb-3">
+      <%= f.label :base_price, class: 'form-label' %>
+      <%= f.number_field :base_price, class: 'form-control' %>
     </div>
-    <div>
-      <%= f.label :extra_guest %>
-      <%= f.number_field :extra_guest %>
+    <div class="mb-3">
+      <%= f.label :extra_guest, class: 'form-label' %>
+      <%= f.number_field :extra_guest, class: 'form-control' %>
     </div>
-    <div>
-      <%= f.label :extra_hour %>
-      <%= f.number_field :extra_hour %>
+    <div class="mb-3">
+      <%= f.label :extra_hour, class: 'form-label' %>
+      <%= f.number_field :extra_hour, class: 'form-control' %>
     </div>
   </fieldset>
 
-  <fieldset>
+  <fieldset class="mb-4">
     <legend>Preços no fim de semana</legend>
-    <div>
-      <%= f.label :we_base_price %>
-      <%= f.number_field :we_base_price %>
+    <div class="mb-3">
+      <%= f.label :we_base_price, class: 'form-label' %>
+      <%= f.number_field :we_base_price, class: 'form-control' %>
     </div>
-    <div>
-      <%= f.label :we_extra_guest %>
-      <%= f.number_field :we_extra_guest %>
+    <div class="mb-3">
+      <%= f.label :we_extra_guest, class: 'form-label' %>
+      <%= f.number_field :we_extra_guest, class: 'form-control' %>
     </div>
-    <div>
-      <%= f.label :we_extra_hour %>
-      <%= f.number_field :we_extra_hour %>
+    <div class="mb-3">
+      <%= f.label :we_extra_hour, class: 'form-label' %>
+      <%= f.number_field :we_extra_hour, class: 'form-control' %>
     </div>
   </fieldset>
 
-  <fieldset>
-    <%= f.label :pictures, "Fotos" %>
-    <%= f.file_field :pictures, multiple: true %>
+  <fieldset class="mb-4">
+    <div class="mb-3">
+      <%= f.label :pictures, "Fotos", class: 'form-label' %>
+      <%= f.file_field :pictures, multiple: true, class: 'form-control' %>
+    </div>
   </fieldset>
-  <div>
-    <%= f.submit 'Enviar' %>
+  
+  <div class="text-center">
+    <%= f.submit 'Enviar', class: 'btn btn-primary' %>
   </div>
 <% end %>

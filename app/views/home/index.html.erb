@@ -1,15 +1,23 @@
 <section>
-  <h2>Buffets</h2>
-  <div class="container pt-5">
-    <% @buffets.each do |b| %>
-      <div>
-        <h3><%= link_to b.brand_name, b %></h3>
-        <%= b.city %>, <%= b.state %>
-      </div>
+  <h2 class="text-center">Buffets</h2>
+  <div class="container-fluid pt-5">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <% @buffets.each do |buffet| %>
+        <div class="col">
+          <div class="card card-custom text-light h-100">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= link_to buffet.brand_name, buffet, class: "text-decoration-none text-light" %>
+              </h5>
+              <p class="card-text"><%= buffet.city %>, <%= buffet.state %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+    <% if @buffets.empty? %>
+      <p class="text-center text-muted">Não existem buffets cadastrados.</p>
     <% end %>
   </div>
-
-  <% if @buffets.empty? %>
-    <p>Não existem buffets cadastrados.</p>
-  <% end %>
 </section>

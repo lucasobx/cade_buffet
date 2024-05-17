@@ -1,5 +1,13 @@
-<h1>Novo Pedido</h1>
+<div class="container mt-5">
+  <h1 class="text-center">Novo Pedido</h1>
 
-<%= render 'form' %>
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <%= render 'form' %>
 
-<%= link_to 'Voltar', buffet_path(@event_type.buffet.id)%>
+      <div class="text-center mt-4">
+        <%= link_to 'Voltar', buffet_path(@event_type.buffet.id), class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  </div>
+</div>

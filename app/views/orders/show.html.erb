@@ -1,107 +1,120 @@
-<h1 class="mb-4">Detalhes do Pedido <%= @order.code %></h1>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card bg-dark text-light">
+        <div class="card-body">
+          <h1 class="card-title mb-4 text-center">Detalhes do Pedido <%= @order.code %></h1>
 
-<% if owner_signed_in? %>
-  <% if @same_day_orders.any? %>
-    <div class="alert alert-warning" role="alert">
-      Atenção: Há mais <%= @same_day_orders.count %> <%= t('helpers.order.scheduled', count: @same_day_orders.count) %> para o mesmo dia!
-      <% @same_day_orders.each do |order| %>
-        <p>Pedido: <%= link_to order.code, order %></p>
-      <% end %>
+          <% if owner_signed_in? %>
+            <% if @same_day_orders.any? %>
+              <div class="alert alert-warning" role="alert">
+                Atenção: Há mais <%= @same_day_orders.count %> <%= t('helpers.order.scheduled', count: @same_day_orders.count) %> para o mesmo dia!
+                <% @same_day_orders.each do |order| %>
+                  <p>Pedido: <%= link_to order.code, order %></p>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+
+          <section id="order_details">
+            <dl class="row">
+              <dd class="col-sm-4"><strong>Cliente:</strong></dd>
+              <dt class="col-sm-8"><%= @order.client.name %></dt>
+              <dd class="col-sm-4"><strong>Evento:</strong></dd>
+              <dt class="col-sm-8"><%= @order.event_type.name %></dt>
+              <dd class="col-sm-4"><strong>Data:</strong></dd>
+              <dt class="col-sm-8"><%= I18n.localize(@order.event_date.to_date) %></dt>
+              <dd class="col-sm-4"><strong>Endereço:</strong></dd>
+              <dt class="col-sm-8">
+                <% if @order.event_type.location_option %>
+                  <%= @order.event_address %>
+                <% else %>
+                  <%= @order.event_type.buffet.full_address %>
+                <% end %>
+              </dt>
+              <dd class="col-sm-4"><strong>Informações Adicionais:</strong></dd>
+              <dt class="col-sm-8"><%= @order.event_details %></dt>
+              <dd class="col-sm-4"><strong>Status:</strong></dd>
+              <dt class="col-sm-8"><%= I18n.translate(@order.status) %></dt>
+              <dd class="col-sm-4">
+                <% if @order.pending? %>
+                  <strong>Valor Provisório:</strong>
+                <% elsif @order.approved? || @order.confirmed? %>
+                  <strong>Valor Final:</strong>
+                <% end %>
+              </dd>
+              <% unless @order.canceled? %>
+                <dt class="col-sm-8">R$<%= @order.final_price %></dt>
+              <% end %>
+
+              <% if @order.approved? %>
+                <dd class="col-sm-4"><strong>Taxa Extra:</strong></dd>
+                <dt class="col-sm-8">R$<%= @order.extra_fee %></dt>
+                <dd class="col-sm-4"><strong>Desconto:</strong></dd>
+                <dt class="col-sm-8">R$<%= @order.discount %></dt>
+                <dd class="col-sm-4"><strong>Detalhes do Ajuste:</strong></dd>
+                <dt class="col-sm-8"><%= @order.adjustment_description %></dt>
+                <dd class="col-sm-4"><strong>Método de Pagamento:</strong></dd>
+                <dt class="col-sm-8"><%= @order.payment_method.name %></dt>
+                <dd class="col-sm-4"><strong>Data-Limite:</strong></dd>
+                <dt class="col-sm-8"><%= I18n.localize(@order.price_valid_until.to_date) %></dt>   
+              <% end %>
+            </dl>
+          </section>
+
+          <% if client_signed_in? && @order.pending? %>
+            <%= link_to 'Editar Pedido', edit_order_path(@order.id), class: 'btn btn-primary me-2' %>
+          <% end %>
+
+          <section id="confirm_order" class="d-inline-block">
+            <% if client_signed_in? && @order.approved? %>
+              <% if Date.today <= @order.price_valid_until  %>
+                <%= button_to 'Confirmar Pedido', confirmed_order_path(@order.id), class: 'btn btn-success me-2' %>
+              <% end %>
+            <% end %>
+          </section>
+
+          <section id="evaluate_order" class="d-inline-block">
+            <% if owner_signed_in? && @order.pending? %>
+              <h2>Avaliar Pedido</h2>
+              <%= Order.human_attribute_name(:final_price)%>: R$<%= @order.final_price %>
+              <%= form_with model: @order, url: approved_order_path(@order.id), class: 'mt-3' do |f| %>
+                <div class="mb-3">
+                  <%= f.label :price_valid_until %>
+                  <%= f.date_field :price_valid_until, class: 'form-control' %>
+                </div>
+                <div class="mb-3">
+                  <%= f.label :extra_fee %>
+                  <%= f.number_field :extra_fee, class: 'form-control' %>
+                </div>
+                <div class="mb-3">
+                  <%= f.label :discount %>
+                  <%= f.number_field :discount, class: 'form-control' %>
+                </div>
+                <div class="mb-3">
+                  <%= f.label :adjustment_description %>
+                  <%= f.text_field :adjustment_description, class: 'form-control' %>
+                </div>
+                <div class="mb-3">
+                  <%= f.label :payment_method_id %>
+                  <%= f.collection_select :payment_method_id, @payment_methods, :id, :name, class: 'form-control' %>
+                </div>
+                <%= f.submit 'Aprovar Pedido', class: 'btn btn-success me-2' %>
+              <% end %>
+            <% end %>
+          </section>
+
+          <section id="cancel_order" class="d-inline-block">
+            <% if @order.pending? || @order.approved? %>
+              <%= button_to 'Cancelar Pedido', canceled_order_path(@order.id), class: 'btn btn-danger me-2' %>
+            <% end %>
+          </section>
+
+          <div class="mt-4 text-center">
+            <%= link_to 'Voltar', root_path, class: 'btn btn-secondary' %>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-<% end %>
-
-<section id="order_details">
-  <dl class="row">
-    <dd class="col-sm-3"><strong>Cliente:</strong></dd>
-    <dt class="col-sm-9"><%= @order.client.name %></dt>
-    <dd class="col-sm-3"><strong>Evento:</strong></dd>
-    <dt class="col-sm-9"><%= @order.event_type.name %></dt>
-    <dd class="col-sm-3"><strong>Data:</strong></dd>
-    <dt class="col-sm-9"><%= I18n.localize(@order.event_date.to_date) %></dt>
-    <dd class="col-sm-3"><strong>Endereço:</strong></dd>
-    <dt class="col-sm-9">
-      <% if @order.event_type.location_option %>
-        <%= @order.event_address %>
-      <% else %>
-        <%= @order.event_type.buffet.full_address %>
-      <% end %>
-    </dt>
-    <dd class="col-sm-3"><strong>Informações Adicionais:</strong></dd>
-    <dt class="col-sm-9"><%= @order.event_details %></dt>
-    <dd class="col-sm-3"><strong>Status:</strong></dd>
-    <dt class="col-sm-9"><%= I18n.translate(@order.status) %></dt>
-    <dd class="col-sm-3">
-      <% if @order.pending? %>
-        <strong>Valor Provisório:</strong>
-      <% else %>
-        <strong>Valor Final:</strong>
-      <% end %>
-    </dd>
-    <dt class="col-sm-9">R$<%= @order.final_price %></dt>
-
-    <% if @order.approved? %>
-      <dd class="col-sm-3"><strong>Taxa Extra:</strong></dd>
-      <dt class="col-sm-9">R$<%= @order.extra_fee %></dt>
-      <dd class="col-sm-3"><strong>Desconto:</strong></dd>
-      <dt class="col-sm-9">R$<%= @order.discount %></dt>
-      <dd class="col-sm-3"><strong>Detalhes do Ajuste:</strong></dd>
-      <dt class="col-sm-9"><%= @order.adjustment_description %></dt>
-      <dd class="col-sm-3"><strong>Método de Pagamento:</strong></dd>
-      <dt class="col-sm-9"><%= @order.payment_method.name %></dt>
-      <dd class="col-sm-3"><strong>Data-Limite:</strong></dd>
-      <dt class="col-sm-9"><%= I18n.localize(@order.price_valid_until.to_date) %></dt>   
-    <% end %>
-  </dl>
-</section>
-
-<% if client_signed_in? && @order.pending? %>
-  <%= link_to 'Editar Pedido', edit_order_path(@order.id) %>
-<% end %>
-
-<section id="confirm_order">
-  <% if client_signed_in? && @order.approved? %>
-    <% if Date.today <= @order.price_valid_until  %>
-      <%= button_to 'Confirmar Pedido', confirmed_order_path(@order.id) %>
-    <% end %>
-  <% end %>
-</section>
-
-<section id="evaluate_order">
-  <% if owner_signed_in? && @order.pending? %>
-    <h2>Avaliar Pedido</h2>
-    <%= Order.human_attribute_name(:final_price)%>: R$<%= @order.final_price %>
-    <%= form_with model: @order, url: approved_order_path(@order.id) do |f| %>
-      <div>
-        <%= f.label :price_valid_until %>
-        <%= f.date_field :price_valid_until %>
-      </div>
-      <div>
-        <%= f.label :extra_fee %>
-        <%= f.number_field :extra_fee %>
-      </div>
-      <div>
-        <%= f.label :discount %>
-        <%= f.number_field :discount %>
-      </div>
-      <div>
-        <%= f.label :adjustment_description %>
-        <%= f.text_field :adjustment_description %>
-      </div>
-      <div>
-        <%= f.label :payment_method_id %>
-        <%= f.collection_select :payment_method_id, @payment_methods, :id, :name %>
-      </div>
-      <%= f.submit 'Aprovar Pedido' %>
-    <% end %>
-    
-  <% end %>
-</section>
-
-<section id="cancel_order">
-  <% if @order.pending? || @order.approved? %>
-    <%= button_to 'Cancelar Pedido', canceled_order_path(@order.id) %>
-  <% end %>
-</section>
-
-<%= link_to 'Voltar', root_path %>
+  </div>
+</div>

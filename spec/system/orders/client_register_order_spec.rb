@@ -72,7 +72,7 @@ describe 'cliente faz pedido para um buffet' do
     expect(current_path).to eq new_order_path
   end
 
-  it 'com dados incompletos' do
+  it 'e deve preencher todos os campos' do
     client = Client.create!(name: 'Julia', personal_code: '94641091064', email: 'julia@email.com', password: '12345678')
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')

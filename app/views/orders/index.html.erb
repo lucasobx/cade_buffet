@@ -1,13 +1,25 @@
-<h1>Meus Pedidos</h1>
+<div class="container mt-5">
+  <h1 class="text-center">Meus Pedidos</h1>
 
-<% if @orders.any? %>
-  <% @orders.each do |order| %>
-    <%= render order %>
+  <% if @orders.any? %>
+    <div class="row justify-content-center">
+      <% @orders.each do |order| %>
+        <div class="col-md-8 mb-4">
+          <div class="card bg-dark text-light">
+            <div class="card-body">
+              <%= render order %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-warning text-center" role="alert">
+      <p>Você não possui nenhum pedido.</p>
+    </div>
   <% end %>
-<% else %>
-  <div class="alert alert-warning" role="alert">
-    <p>Você não possui nenhum pedido.</p>
-  </div>
-<% end %>
 
-<%= link_to 'Voltar', root_path %>
+  <div class="text-center mt-4">
+    <%= link_to 'Voltar', root_path, class: 'btn btn-secondary' %>
+  </div>
+</div>

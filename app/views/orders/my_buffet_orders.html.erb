@@ -1,67 +1,79 @@
 <% if @orders.any? %>
-  <h2>Pedidos Aguardando Avaliação</h2>
-  <table class="table table-striped table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th>Código</th>
-        <th>Evento</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.select { |order| order.status == "pending" }.each do |order| %>
-        <tr>
-          <td><%= link_to order.code, order_path(order.id) %></td>
-          <td><%= order.event_type.name %></td>
-          <td><%= I18n.translate(order.status) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <% pending_orders = @orders.select { |order| order.status == "pending" } %>
+  <% approved_orders = @orders.select { |order| order.status == "approved" } %>
+  <% canceled_orders = @orders.select { |order| order.status == "canceled" } %>
 
-  <h2>Pedidos Aprovados</h2>
-  <table class="table table-striped table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th>Código</th>
-        <th>Evento</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.select { |order| order.status == "approved" }.each do |order| %>
+  <% if pending_orders.any? %>
+    <h2>Pedidos Aguardando Avaliação</h2>
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
         <tr>
-          <td><%= link_to order.code, order_path(order.id) %></td>
-          <td><%= order.event_type.name %></td>
-          <td><%= I18n.translate(order.status) %></td>
+          <th>Código</th>
+          <th>Evento</th>
+          <th>Status</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% pending_orders.each do |order| %>
+          <tr>
+            <td><%= link_to order.code, order_path(order.id) %></td>
+            <td><%= order.event_type.name %></td>
+            <td><%= I18n.translate(order.status) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 
-  <h2>Pedidos Cancelados</h2>
-  <table class="table table-striped table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th>Código</th>
-        <th>Evento</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.select { |order| order.status == "canceled" }.each do |order| %>
+  <% if approved_orders.any? %>
+    <h2>Pedidos Aprovados</h2>
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
         <tr>
-          <td><%= link_to order.code, order_path(order.id) %></td>
-          <td><%= order.event_type.name %></td>
-          <td><%= I18n.translate(order.status) %></td>
+          <th>Código</th>
+          <th>Evento</th>
+          <th>Status</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% approved_orders.each do |order| %>
+          <tr>
+            <td><%= link_to order.code, order_path(order.id) %></td>
+            <td><%= order.event_type.name %></td>
+            <td><%= I18n.translate(order.status) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <% if canceled_orders.any? %>
+    <h2>Pedidos Cancelados</h2>
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Código</th>
+          <th>Evento</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% canceled_orders.each do |order| %>
+          <tr>
+            <td><%= link_to order.code, order_path(order.id) %></td>
+            <td><%= order.event_type.name %></td>
+            <td><%= I18n.translate(order.status) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 <% else %>
   <div class="alert alert-warning" role="alert">
     <p>Não há pedidos registrados.</p>
   </div>
 <% end %>
 
-<%= link_to 'Voltar', root_path %>
+<div class="text-center mt-4">
+  <%= link_to 'Voltar', root_path, class: 'btn btn-secondary' %>
+</div>

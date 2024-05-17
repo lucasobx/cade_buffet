@@ -30,5 +30,7 @@ describe 'cliente cancela pedido' do
     expect(page).to have_content 'Status: Cancelado'
     expect(page).not_to have_button 'Cancelar Pedido'
     expect(page).not_to have_link 'Editar Pedido'
+    expect(page).not_to have_content 'Valor Provisório'
+    expect(page).not_to have_content 'Valor Final'
   end
 end

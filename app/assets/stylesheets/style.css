@@ -1,0 +1,12 @@
+.navbar-title {
+  text-decoration: none;
+}
+
+.navbar-title:hover {
+  text-decoration: none;
+}
+
+.card-custom {
+  background-color: #343a40;
+  border: 1px solid #444;
+}

@@ -1,12 +1,11 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-6">
       <h1><%= @buffet.brand_name %></h1>
-      <strong>Descrição:</strong> <%= @buffet.description %>
 
       <dl>
-        <dt>Contato:</dt>
-        <dd><%= @buffet.phone_number %> - <%= @buffet.email %></dd>
+        <dt>Descrição:</dt>
+        <dd><%= @buffet.description %></dd>
         <dt>Contato:</dt>
         <dd><%= @buffet.phone_number %> - <%= @buffet.email %></dd>
         <dt>Endereço:</dt>
@@ -17,14 +16,17 @@
       </dl>
 
       <% if owner_signed_in? && current_owner == @buffet.owner %>
-        <%= link_to 'Editar', edit_buffet_path %>
-        <%= link_to 'Cadastrar Tipo de Evento', new_buffet_event_type_path(@buffet) %>
+        <%= link_to 'Editar', edit_buffet_path(@buffet), class: 'btn btn-primary' %>
+        <%= link_to 'Cadastrar Tipo de Evento', new_buffet_event_type_path(@buffet), class: 'btn btn-secondary' %>
       <% end %>
     </div>
+
     <div class="col-md-6">
       <% if @event_types.any? %>
         <h2>Eventos Fornecidos</h2>
-        <%= render partial: 'event_types', locals: { event_types: @event_types } %>
+        <div class="row row-cols-1 g-4">
+          <%= render partial: 'event_types', locals: { event_types: @event_types } %>
+        </div>
       <% else %>
         <p>Não existem eventos cadastrados para este Buffet.</p>
       <% end %>
@@ -32,4 +34,6 @@
   </div>
 </div>
 
-<%= link_to 'Voltar', root_path %>
+<div class="text-center mt-4">
+  <%= link_to 'Voltar', root_path, class: 'btn btn-secondary' %>
+</div>

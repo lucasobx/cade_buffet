@@ -1,37 +1,49 @@
-<% if @order.errors.any? %>
-  <p>Verifique os erros abaixo:</p>
-  <ul>
-  <% @order.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-  </ul>
-<% end %>
-
-<%= form_with model: @order do |f| %>
-  <%= hidden_field_tag :event_type_id, @event_type.id %>
-  
-  <div class="mb-3">
-    <%= f.label :event_date %>
-    <%= f.date_field :event_date %>
-  </div>
-  <div class="mb-3">
-    <%= f.label :estimated_guests %>
-    <%= f.number_field :estimated_guests %>
-  </div>
-  <div class="mb-3">
-    <%= f.label :event_details, class: 'form-label' %>
-    <%= f.text_area :event_details, class: 'form-control' %>
-  </div>
-
-  <% if @show_address %>
-    <%= f.label :event_address %>
-    <%= f.text_field :event_address %>
-  <% else %>
-    <div class="mb-3">
-      <%= f.label :event_address %>:
-      <span class="form-text"><%= @event_type.buffet.full_address %></p>
+<div class="container mt-5">
+  <% if @order.errors.any? %>
+    <div class="alert alert-danger">
+      <p>Verifique os erros abaixo:</p>
+      <ul>
+        <% @order.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
 
-  <%= f.submit 'Enviar' %>
-<% end %>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with model: @order, class: 'mt-4' do |f| %>
+        <%= hidden_field_tag :event_type_id, @event_type.id %>
+        
+        <div class="mb-3">
+          <%= f.label :event_date, class: 'form-label' %>
+          <%= f.date_field :event_date, class: 'form-control' %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :estimated_guests, class: 'form-label' %>
+          <%= f.number_field :estimated_guests, class: 'form-control' %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :event_details, class: 'form-label' %>
+          <%= f.text_area :event_details, class: 'form-control' %>
+        </div>
+
+        <% if @show_address %>
+          <div class="mb-3">
+            <%= f.label :event_address, class: 'form-label' %>
+            <%= f.text_field :event_address, class: 'form-control' %>
+          </div>
+        <% else %>
+          <div class="mb-3">
+            <%= f.label :event_address, class: 'form-label' %>:
+            <span class="form-text"><%= @event_type.buffet.full_address %></span>
+          </div>
+        <% end %>
+
+        <div class="text-center">
+          <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

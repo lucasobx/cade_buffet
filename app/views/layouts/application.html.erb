@@ -16,84 +16,72 @@
       <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #111;">
         <div class="container-fluid">
           <div class="navbar-brand">
-            <%= link_to root_path do %>
+            <%= link_to root_path, class: 'navbar-title' do %>
               <h1>CadeBuffet</h1>
             <% end %>
           </div>
-          
+                    
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
-           <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <% if client_signed_in? %>
                 <li class="nav-item">
-                  <div class="nav-link disabled">
-                    <%= current_client.description %>
-                  </div>
+                  <span class="nav-link disabled"><%= current_client.description %></span>
                 </li>
                 <li class="nav-item">
-                  <div class="nav-link">
-                    <%= link_to 'Meus Pedidos', client_orders_path %>
-                  </div>
+                  <%= link_to 'Meus Pedidos', client_orders_path, class: "nav-link" %>
                 </li>
                 <li class="nav-item">
-                  <div class="nav-link">
-                    <%= link_to 'Sair', destroy_client_session_path, data: { turbo_method: :delete } %>
-                  </div>
+                  <%= link_to 'Sair', destroy_client_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
                 </li>
               <% elsif owner_signed_in? %>
                 <li class="nav-item">
-                  <div class="nav-link disabled">
-                    <%= current_owner.description %>
-                  </div>
+                  <span class="nav-link disabled"><%= current_owner.description %></span>
                 </li>
                 <li class="nav-item">
-                  <div class="nav-link">
-                    <%= link_to 'Pedidos', buffet_orders_path %>
-                  </div>
+                  <%= link_to 'Pedidos', buffet_orders_path, class: "nav-link" %>
                 </li>
                 <li class="nav-item">
-                  <div class="nav-link">
-                    <%= link_to 'Meu Buffet', current_owner.buffet if current_owner.buffet.present? %>
-                  </div>
+                  <%= link_to 'Meu Buffet', current_owner.buffet, class: "nav-link" if current_owner.buffet.present? %>
                 </li>
                 <li class="nav-item">
-                  <div class="nav-link">
-                    <%= link_to 'Sair', destroy_owner_session_path, data: { turbo_method: :delete } %>
-                  </div>
+                  <%= link_to 'Sair', destroy_owner_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
                 </li>
               <% else %>
                 <li class="nav-item">
-                  <div class="nav-link">
-                    <%= link_to 'Entrar Como Cliente', new_client_session_path %>
-                  </div>
+                  <%= link_to 'Entrar Como Cliente', new_client_session_path, class: "nav-link" %>
                 </li>
                 <li class="nav-item">
-                  <div class="nav-link">
-                    <%= link_to 'Dono de Buffet', new_owner_session_path %>
-                  </div>
+                  <%= link_to 'Dono de Buffet', new_owner_session_path, class: "nav-link" %>
                 </li>
               <% end %>
             </ul>
 
-            <div class="d-flex" role="search">
-              <%= form_with url: search_buffets_path, method: :get do |f| %>
-                <%= f.label :query, 'Buscar Buffet' %>
-                <%= f.text_field :query %>
-                <%= f.submit 'Buscar' %>
-              <% end %>
-            </div>
+            <form class="d-flex" role="search" action="<%= search_buffets_path %>" method="get">
+              <input class="form-control me-2" type="search" placeholder="Buscar Buffet" aria-label="Search" name="query" id="query">
+              <button class="btn btn-outline-light" type="submit">Buscar</button>
+            </form>
           </div>
         </div>
       </nav>
     </header>
-    <main class="container">
+    
+    <main class="container-fluid mt-4">
       <div class="row justify-content-center">
-        <div class="col-md-8">
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
+        <div class="col-md-10">
+          <% if notice.present? %>
+            <div class="alert alert-success text-center">
+              <%= notice %>
+            </div>
+          <% end %>
+          <% if alert.present? %>
+            <div class="alert alert-warning text-center">
+              <%= alert %>
+            </div>
+          <% end %>
           <%= yield %>
         </div>
       </div>
