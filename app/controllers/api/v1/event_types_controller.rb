@@ -28,7 +28,7 @@ class Api::V1::EventTypesController < Api::V1::ApiController
 
     estimated_price = calculate_price(event_type, event_date, guest_number)
 
-    render status: 200, json: event_type.as_json.merge(estimated_price: estimated_price)
+    render status: 200, json: event_type.as_json(only: [:id, :name]).merge(estimated_price: estimated_price)
   end
 
   private
