@@ -40,7 +40,7 @@ describe 'cliente vê seus próprios pedidos' do
   end
 
   it 'e vê detalhes de um pedido' do
-    joao = Client.create!(name: 'Joao', personal_code: '94641091064', email: 'joao@email.com', password: '12345678')
+    client = Client.create!(name: 'Joao', personal_code: '94641091064', email: 'joao@email.com', password: '12345678')
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')
     pix = PaymentMethod.create!(name: 'Pix')
@@ -55,10 +55,10 @@ describe 'cliente vê seus próprios pedidos' do
                               alcohol_option: false, decoration_option: true, parking_service_option: true,
                               location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
                               extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
-    order = Order.create!(client: joao, buffet: buffet, event_type: event, event_date: 1.day.from_now,
+    order = Order.create!(client: client, buffet: buffet, event_type: event, event_date: 1.day.from_now,
                           estimated_guests: 30, event_details: 'Festa de aniversário', event_address: 'Rua da Praça, 273')
 
-    login_as joao, scope: :client
+    login_as client, scope: :client
     visit root_path
     click_on 'Meus Pedidos'
     click_on order.code

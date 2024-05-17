@@ -3,8 +3,7 @@
 <% if owner_signed_in? %>
   <% if @same_day_orders.any? %>
     <div class="alert alert-warning" role="alert">
-      Atenção: Há mais <%= @same_day_orders.count %> <%= Order.model_name.human(count: @same_day_orders).downcase %>
-                       <%= t(:scheduled, count: @same_day_orders.count) %> para o mesmo dia!
+      Atenção: Há mais <%= @same_day_orders.count %> <%= t('helpers.order.scheduled', count: @same_day_orders.count) %> para o mesmo dia!
       <% @same_day_orders.each do |order| %>
         <p>Pedido: <%= link_to order.code, order %></p>
       <% end %>
@@ -95,7 +94,12 @@
       </div>
       <%= f.submit 'Aprovar Pedido' %>
     <% end %>
+    
+  <% end %>
+</section>
 
+<section id="cancel_order">
+  <% if @order.pending? || @order.approved? %>
     <%= button_to 'Cancelar Pedido', canceled_order_path(@order.id) %>
   <% end %>
 </section>

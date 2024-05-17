@@ -82,7 +82,6 @@ describe 'dono de buffet informa novo status de pedido' do
     expect(page).to have_content 'Método de Pagamento: Pix'
     expect(page).to have_content 'Status: Aprovado'
     expect(page).not_to have_button 'Aprovar Pedido'
-    expect(page).not_to have_button 'Cancelar Pedido'
   end
 
   it 'e pedido é cancelado' do

@@ -6,8 +6,8 @@ pt-BR:
   activerecord:
     models:
       order:
-        one: Pedido
-        other: Pedidos
+        one: "Pedido"
+        other: "Pedidos"
     attributes:
       order:
         client_id: "Cliente"
@@ -25,3 +25,8 @@ pt-BR:
         discount: "Desconto"
         adjustment_description: "Detalhes do Ajuste"
         payment_method_id: "Método de Pagamento"
+  helpers:
+    order:
+      scheduled:
+        one: "pedido agendado"
+        other: "pedidos agendados"

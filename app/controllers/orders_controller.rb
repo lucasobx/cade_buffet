@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_client!, only: [:new, :create, :edit, :update, :index]
   before_action :authenticate_owner!, only: [:my_buffet_orders]
-  before_action :set_order_and_check_client, only: [:show, :edit, :update, :confirmed], if: -> { client_signed_in? }
+  before_action :set_order_and_check_client, only: [:show, :edit, :update, :canceled, :confirmed], if: -> { client_signed_in? }
   before_action :set_order_and_check_owner, only: [:show, :canceled, :approved], if: -> { owner_signed_in? }
   before_action :set_event_type_from_params, only: [:new, :create]
   before_action :set_event_type_from_order, only: [:edit, :update]
