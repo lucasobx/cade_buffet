@@ -119,6 +119,7 @@ describe 'cliente faz pedido para um buffet' do
                       location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
                       extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
 
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABC12345')
     login_as client, scope: :client
     visit root_path
     click_on 'Miniland'
@@ -131,7 +132,7 @@ describe 'cliente faz pedido para um buffet' do
 
     expect(current_path).to eq order_path(Order.last)
     expect(page).to have_content 'Agendamento realizado com sucesso!'
-    expect(page).to have_content "Detalhes do Pedido #{Order.last.code}"
+    expect(page).to have_content "Detalhes do Pedido ABC12345"
     expect(page).to have_content 'Festa dos Heróis'
     expect(page).to have_content "Data: #{I18n.localize(7.days.from_now.to_date)}"
     expect(page).to have_content 'Endereço: Rua da Praça, 273'
