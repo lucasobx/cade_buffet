@@ -23,6 +23,9 @@ Todas as funcionalidades foram feitas utilizando TDD (Test Driven Development), 
 ### Pedidos de Clientes
 
 - Cliente pode agendar um evento
+- Cliente pode editar um pedido
+- Cliente pode ter apenas um pedido marcado como 'pendente' por buffet
+- Dono de buffet e cliente podem cancelar um pedido
 - Dono de buffet avalia e aprova pedido
 - Cliente confirma pedido
 
