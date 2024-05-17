@@ -150,7 +150,7 @@ http://localhost:3000/api/v1/buffets/
 ]
 ```
 
-  - `/api/v1/buffets?search=example` - Busca de buffets
+  - `/api/v1/buffets` + `params: {search: name}` - Busca de buffets
 
 **Exemplo de Requisição**
 ```
@@ -226,14 +226,37 @@ http://localhost:3000/api/v1/buffets/1/event_types/
 ]
 ```
 
-  - `/api/v1/event_types/:id` - Consulta de disponibilidade de um evento de buffet
+  - `/api/v1/event_types/:id` + `params: {event_date: date, guest_number: guest_number}` - Consulta de disponibilidade de um evento
 
 **Exemplo de Requisição**
 ```
-http://localhost:3000/api/v1/event_types/1/
+http://localhost:3000/api/v1/event_types/1?event_date=2025-05-10&guest_number=30
 ```
 
 **Exemplo de Resposta**
 ```json
-
+{
+  "id": 1,
+  "name": "Festa de Casamento",
+  "estimated_price": "21000.0"
+}
 ```
+
+**Descrição dos Atributos**
+- `id`: Identificador único
+- `name`: Nome do tipo de evento
+- `description`: Descrição detalhada do evento
+- `min_guests`: Quantidade mínima de convidados permitida para o evento
+- `max_guests`: Quantidade máxima de convidados permitida para o evento
+- `duration`: Duração padrão do evento em minutos
+- `menu_details`: Texto que indica o cardápio para o evento
+- `alcohol_option`: Indica se o evento possui opção de bebidas alcoólicas (`true` ou `false`)
+- `decoration_option`: Indica se o evento possui opção de decoração (`true` ou `false`)
+- `parking_service_option`: Indica se o evento possui serviço de estacionamento ou valet (`true` ou `false`)
+- `location_option`: Indica se o evento pode ser realizado em um endereço indicado pelo contratante (`true` ou `false`)
+- `base_price`: Preço base do evento
+- `extra_guest`: Custo adicional por convidado extra
+- `extra_hour`: Custo adicional por hora extra
+- `we_base_price`: Preço base do evento nos fins de semana
+- `we_extra_guest`: Custo adicional por convidado extra nos fins de semana
+- `we_extra_hour`: Custo adicional por hora extra nos fins de semana
