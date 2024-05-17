@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Buffet API' do
-  context 'GET /api/v1/buffets/id' do
+  context 'GET /api/v1/buffets/:id' do
     it 'com sucesso' do
       owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
       cash = PaymentMethod.create!(name: 'Dinheiro')

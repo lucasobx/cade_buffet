@@ -6,13 +6,14 @@ class Api::V1::BuffetsController < Api::V1::ApiController
       render status: 200, json: buffets
     else
       buffets = Buffet.all.order(:brand_name)
-      render status: 200, json: buffets
+      render status: 200, json: buffets.as_json(except: [:created_at, :updated_at, :owner_id])
     end
   end
 
   def show
     buffet = Buffet.find(params[:id])
     render status: 200, json: buffet.as_json(include: {payment_methods: {only: [:name]}},
-                                             except: [:corporate_name, :registration_code])
+                                             except: [:corporate_name, :registration_code,
+                                                      :created_at, :updated_at, :owner_id])
   end
 end
