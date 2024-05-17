@@ -2,7 +2,7 @@ class Api::V1::EventTypesController < Api::V1::ApiController
   def index
     buffet = Buffet.find(params[:buffet_id])
     if buffet.event_types.present?
-      render status: 200, json: buffet.event_types.order(:name).as_json
+      render status: 200, json: buffet.event_types.order(:name).as_json(except: [:created_at, :updated_at, :buffet_id])
     else
       render json: {}, status: 404
     end
