@@ -8,6 +8,7 @@ class Order < ApplicationRecord
 
   validates :code, :event_date, :estimated_guests, presence: true
   validate :event_date_is_future
+  validate :unique_pending_order_per_buffet, on: :create
 
   before_validation :generate_code, on: :create
   before_save :calculate_final_price
@@ -42,5 +43,11 @@ class Order < ApplicationRecord
     if self.event_date.present? && self.event_date <= Date.today
       self.errors.add :event_date, "deve ser futura."
     end    
+  end
+
+  def unique_pending_order_per_buffet
+    if Order.where(client: client, buffet: buffet, status: :pending).exists?
+      errors.add(:base, 'Já existe um pedido pendente para este buffet.')
+    end
   end
 end

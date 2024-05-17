@@ -51,13 +51,13 @@ describe 'Dono de Buffet vê lista de pedidos' do
     
     order1 = Order.create!(client: joao, buffet: buffet, event_type: event1, event_date: 1.day.from_now,
                            estimated_guests: 30, event_details: 'Festa de aniversário',
-                           event_address: 'Rua da Praça, 273', status: :pending)
+                           event_address: 'Rua da Praça, 273', status: :approved)
     order2 = Order.create!(client: maria, buffet: buffet, event_type: event2, event_date: 1.day.from_now,
                            estimated_guests: 30, event_details: 'Festa de aniversário',
                            event_address: 'Rua das Flores, 10', status: :canceled)
     order3 = Order.create!(client: joao, buffet: buffet, event_type: event1, event_date: 1.week.from_now,
                            estimated_guests: 30, event_details: 'Festa de aniversário',
-                           event_address: 'Rua da Praça, 273', status: :approved)
+                           event_address: 'Rua da Praça, 273', status: :pending)
 
     login_as(owner, scope: :owner)
     visit root_path

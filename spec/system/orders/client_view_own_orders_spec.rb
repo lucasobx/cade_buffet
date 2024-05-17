@@ -20,13 +20,13 @@ describe 'Cliente vê seus próprios pedidos' do
                               extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
     order1 = Order.create!(client: joao, buffet: buffet, event_type: event, event_date: 1.day.from_now,
                            estimated_guests: 30, event_details: 'Festa de aniversário',
-                           event_address: 'Rua da Praça, 273', status: :pending)
+                           event_address: 'Rua da Praça, 273', status: :approved)
     order2 = Order.create!(client: maria, buffet: buffet, event_type: event, event_date: 1.day.from_now,
                            estimated_guests: 30, event_details: 'Festa de aniversário',
                            event_address: 'Rua da Praça, 273', status: :pending)
     order3 = Order.create!(client: joao, buffet: buffet, event_type: event, event_date: 1.week.from_now,
                            estimated_guests: 30, event_details: 'Festa de aniversário',
-                           event_address: 'Rua da Praça, 273', status: :approved)
+                           event_address: 'Rua da Praça, 273', status: :pending)
 
     login_as joao, scope: :client
     visit root_path

@@ -1,9 +1,8 @@
 require 'rails_helper'
 
-describe 'Usuário edita um pedido' do
-  it 'e não é o dono' do
+describe 'Cliente faz pedido para um buffet' do
+  it 'e já possui um pedido pendente' do
     joao = Client.create!(name: 'Joao', personal_code: '94441092264', email: 'joao@email.com', password: '12345678')
-    julia = Client.create!(name: 'Julia', personal_code: '94641091064', email: 'julia@email.com', password: '12345678')
     owner = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '12345678')
     cash = PaymentMethod.create!(name: 'Dinheiro')
     pix = PaymentMethod.create!(name: 'Pix')
@@ -18,13 +17,16 @@ describe 'Usuário edita um pedido' do
                               alcohol_option: false, decoration_option: true, parking_service_option: true,
                               location_option: true, buffet: buffet, base_price: 5000.0, extra_guest: 100.0,
                               extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
-    order = Order.create!(client: julia, buffet: buffet, event_type: event, event_date: 1.day.from_now,
-                          estimated_guests: 30, event_details: 'Festa de aniversário',
-                          event_address: 'Rua da Praça, 273', status: :pending)
+    Order.create!(client: joao, buffet: buffet, event_type: event, event_date: 1.day.from_now,
+                  estimated_guests: 30, event_details: 'Festa de aniversário',
+                  event_address: 'Rua da Praça, 273', status: :pending)
 
     login_as joao, scope: :client
-    patch(order_path(order.id), params: { order: { event_date: '05/05/2030' }})
+    post orders_path, params: { order: { buffet_id: buffet.id, event_date: 1.week.from_now, estimated_guests: 20,
+                                         event_details: 'Festa de aniversário', event_address: 'Rua da Praça, 273' },
+                                         event_type_id: event.id }
 
-    expect(response).to redirect_to root_path
+    expect(response).to redirect_to buffet_path(buffet.id)
+    expect(flash[:alert]).to eq 'Já existe um pedido pendente para este buffet.'
   end
 end

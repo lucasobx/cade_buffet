@@ -6,6 +6,7 @@ class BuffetsController < ApplicationController
 
   def show
     @event_types = @buffet.event_types
+    @pending_order = current_client.orders.find_by(buffet: @buffet, status: :pending) if client_signed_in?
   end
 
   def new

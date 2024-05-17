@@ -25,10 +25,13 @@ class OrdersController < ApplicationController
     @order.client = current_client
     @order.buffet = @event_type.buffet
 
-    if @order.save
+    if Order.where(client: current_client, buffet: @order.buffet, status: :pending).exists?
+      flash[:alert] = 'Já existe um pedido pendente para este buffet.'
+      redirect_to buffet_path(@order.buffet)
+    elsif @order.save
       redirect_to @order, notice: 'Agendamento realizado com sucesso!'
     else
-      flash.now[:notice] = 'Não foi possível concluir o agendamento.'
+      flash.now[:alert] = 'Não foi possível concluir o agendamento.'
       render 'new', status: 422
     end
   end

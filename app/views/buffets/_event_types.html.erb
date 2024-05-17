@@ -38,8 +38,12 @@
 
     <div>
       <% unless owner_signed_in? %>
-        <%= link_to new_order_path(event_type_id: event.id) do %>
-          <p>Agendar <%= event.name %>
+        <% if @pending_order %>
+          <p>Já existe um <%= link_to 'pedido', order_path(@pending_order) %> pendente para este buffet.</p>
+        <% else %>
+          <%= link_to new_order_path(event_type_id: event.id) do %>
+            <p>Agendar <%= event.name %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
