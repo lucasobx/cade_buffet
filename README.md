@@ -61,14 +61,25 @@ Todas as funcionalidades foram feitas utilizando TDD (Test Driven Development), 
 **2. Execute:**
    ```
    bundle install
+   yarn install
    ```
    ```
    rails db:setup
    ```
-**3. Acesse:**
+**3. Inicie o Servidor:**
+   ```
+   rails server
+   ```
+**4. Acesse a aplicação:**
    ```
    http://localhost:3000
    ```
+
+## Executando os Testes
+```
+bundle exec rspec
+```
+
 ## Login
 **Login como dono de buffet**
 - Email: lucas@email.com
@@ -101,7 +112,6 @@ http://localhost:3000/api/v1/buffets/1/
   "state": "SP",
   "postal_code": "14980-970",
   "description": "Buffet especializado em casamentos",
-  "owner_id": 1,
   "payment_methods": [
     {"name": "Dinheiro"},
     {"name": "Pix"}
@@ -131,7 +141,11 @@ http://localhost:3000/api/v1/buffets/
     "city": "São Paulo",
     "state": "SP",
     "postal_code": "14980-970",
-    "description": "Buffet especializado em casamentos"
+    "description": "Buffet especializado em casamentos",
+    "payment_methods": [
+      {"name": "Dinheiro"},
+      {"name": "Pix"}
+    ]
   },
   {
     "id": 2,
@@ -145,7 +159,11 @@ http://localhost:3000/api/v1/buffets/
     "city": "Belo Horizonte",
     "state": "MG",
     "postal_code": "55280-001",
-    "description": "Buffet para festa infantil"
+    "description": "Buffet para festa infantil",
+    "payment_methods": [
+      {"name": "Dinheiro"},
+      {"name": "Pix"}
+    ]
   }
 ]
 ```
@@ -173,6 +191,10 @@ http://localhost:3000/api/v1/buffets?search=Edecy
     "state": "MG",
     "postal_code": "55280-001",
     "description": "Buffet para festa infantil",
+    "payment_methods": [
+      {"name": "Dinheiro"},
+      {"name": "Pix"}
+    ]
   }
 ]
 ```
@@ -213,9 +235,6 @@ http://localhost:3000/api/v1/buffets/1/event_types/
     "decoration_option": true,
     "parking_service_option": true,
     "location_option": false,
-    "buffet_id": 1,
-    "created_at": "2024-05-17T13:04:11.043Z",
-    "updated_at": "2024-05-17T13:04:11.043Z",
     "base_price": "10000.0",
     "extra_guest": "250.0",
     "extra_hour": "1000.0",
