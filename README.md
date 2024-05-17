@@ -53,6 +53,8 @@ Todas as funcionalidades foram feitas utilizando TDD (Test Driven Development), 
 **1. Clone o repositório:**
    ```
    git clone https://github.com/lucasobx/cade_buffet.git
+   ```
+   ```
    cd cade_buffet
    ```
 
