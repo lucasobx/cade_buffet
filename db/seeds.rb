@@ -7,6 +7,13 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+def attach_images(record, filenames)
+  filenames.each do |filename|
+    file_path = Rails.root.join('db', 'seeds', 'images', filename)
+    record.pictures.attach(io: File.open(file_path), filename: filename)
+  end
+end
+
 owner1 = Owner.create!(name: 'Lucas', email: 'lucas@email.com', password: '12345678')
 owner2 = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '87654321')
 owner3 = Owner.create!(name: 'Julia', email: 'julia@email.com', password: '14725836')
@@ -27,30 +34,38 @@ event1 = EventType.create!(name: 'Festa de Casamento', description: 'Espaço lux
                            alcohol_option: true, decoration_option: true, parking_service_option: true,
                            location_option: false, buffet: buffet1, base_price: 10000.0, extra_guest: 250.0,
                            extra_hour: 1000.0, we_base_price: 15000.0, we_extra_guest: 400.0, we_extra_hour: 1500.0)
+event2 = EventType.create!(name: 'Casamento na Praia', description: 'Se o seu casamento tem uma proposta mais informal, essa é a opção certa',
+                           min_guests: 20, max_guests: 100, duration: 240,
+                           menu_details: 'Frutos do Mar, Salgados, Bebidas, Saladas',
+                           alcohol_option: true, decoration_option: true, parking_service_option: false,
+                           location_option: false, buffet: buffet1, base_price: 15000.0, extra_guest: 500.0,
+                           extra_hour: 1000.0, we_base_price: 20000.0, we_extra_guest: 700.0, we_extra_hour: 2000.0)
+attach_images(event1, ['casamento.jpg'])
+attach_images(event2, ['praia.jpg'])
 
 buffet2 = Buffet.create!(brand_name: 'Edecy Buffet', corporate_name: 'Edecy Buffet LTDA',
                          registration_code: '55996244000122', phone_number: '(11)22229988', email: 'edecy@email.com',
                          address: 'Rua Castilho, 560', neighborhood: 'Piratininga', city: 'Belo Horizonte', state: 'MG',
                          postal_code: '55280-001', description: 'Buffet para festa infantil',
                          owner: owner2, payment_methods: [credit, debit])
-event2 = EventType.create!(name: 'Piscina de Bolinhas', description: 'Festa infantil com fantasias',
-                           min_guests: 10, max_guests: 50, duration: 120,
-                           menu_details: 'Doces, Salgados',
-                           alcohol_option: false, decoration_option: true, parking_service_option: true,
-                           location_option: true, buffet: buffet2, base_price: 5000.0, extra_guest: 100.0,
-                           extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
+EventType.create!(name: 'Piscina de Bolinhas', description: 'Festa infantil com fantasias',
+                  min_guests: 10, max_guests: 50, duration: 120,
+                  menu_details: 'Doces, Salgados',
+                  alcohol_option: false, decoration_option: true, parking_service_option: true,
+                  location_option: true, buffet: buffet2, base_price: 5000.0, extra_guest: 100.0,
+                  extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
 
 buffet3 = Buffet.create!(brand_name: 'La Luna Casamentos', corporate_name: 'La Luna Casamentos LTDA',
                          registration_code: '63001164000100', phone_number: '(11)22223333', email: 'laluna@email.com',
                          address: 'Av Pinheiros, 50', neighborhood: 'Pinheiros', city: 'São Paulo', state: 'SP',
                          postal_code: '05080-001', description: 'Buffet especializado em casamentos',
                          owner: owner3, payment_methods: [credit, debit]) 
-event3 = EventType.create!(name: 'Festa de Casamento', description: 'Local espaçoso, versátil e confortável',
-                           min_guests: 10, max_guests: 50, duration: 120,
-                           menu_details: 'Bolo, Doces, Salgados e Bebidas',
-                           alcohol_option: true, decoration_option: true, parking_service_option: true,
-                           location_option: true, buffet: buffet3, base_price: 5000.0, extra_guest: 100.0,
-                           extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
+EventType.create!(name: 'Festa de Casamento', description: 'Local espaçoso, versátil e confortável',
+                  min_guests: 10, max_guests: 50, duration: 120,
+                  menu_details: 'Bolo, Doces, Salgados e Bebidas',
+                  alcohol_option: true, decoration_option: true, parking_service_option: true,
+                  location_option: true, buffet: buffet3, base_price: 5000.0, extra_guest: 100.0,
+                  extra_hour: 500.0, we_base_price: 8000.0, we_extra_guest: 200.0, we_extra_hour: 800.0)
 
 client1 = Client.create!(name: 'Julia', personal_code: '47406693079', email: 'julia@email.com', password: '12345678')
 client2 = Client.create!(name: 'Bruna', personal_code: '37307794571', email: 'bruna@email.com', password: '12345678')
