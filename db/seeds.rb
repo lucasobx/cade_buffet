@@ -16,7 +16,7 @@ end
 
 owner1 = Owner.create!(name: 'Lucas', email: 'lucas@email.com', password: '12345678')
 owner2 = Owner.create!(name: 'Jorge', email: 'jorge@email.com', password: '87654321')
-owner3 = Owner.create!(name: 'Julia', email: 'julia@email.com', password: '14725836')
+owner3 = Owner.create!(name: 'Jessica', email: 'jessica@email.com', password: '14725836')
 
 pix = PaymentMethod.create!(name: 'Pix')
 cash = PaymentMethod.create!(name: 'Dinheiro')

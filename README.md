@@ -90,7 +90,7 @@ bundle exec rspec
 
 **Login como cliente**
 - Email: julia@email.com
-- Senha: 14725836
+- Senha: 12345678
 
 ## Cadê Buffet API
 
